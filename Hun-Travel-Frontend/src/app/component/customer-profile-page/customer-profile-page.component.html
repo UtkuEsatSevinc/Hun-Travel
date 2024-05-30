@@ -1,0 +1,421 @@
+<head>
+  <style>
+    footer {
+      background: #191970;
+      padding-top: 20px;
+      padding-bottom: white;
+      font-size: 24px;
+    }
+
+    footer a {
+      color: white;
+      font-size: 20px;
+    }
+
+    .navbar {
+      background-color: #191970;
+    }
+    .navbar-brand {
+      margin-left: 20px; /* HUN Travel yazısına 30 piksel sol boşluk ekle */
+    }
+    .spacer {
+      margin-bottom: 4em;
+    }
+    .spacer1 {
+      margin-bottom: 2em;
+    }
+    .spacer2 {
+      margin-bottom: 6em;
+    }
+    .spacer3 {
+      margin-bottom: 26px;
+    }
+
+    .button {
+      margin: 10px;
+      border-radius: 15px;
+      width: 220px;
+      font-size: 20px;
+      height: auto;
+      background-color: white;
+      font-weight: 600;
+      padding: 5px 0;
+      margin-left: 40px;
+    }
+    .container {
+      display: flex;
+      justify-content: center; /* Yatayda ortala */
+      align-items: center; /* Dikeyde ortala */
+      height: 600px; /* İçerik yüksekliği */
+      margin-left: 10em;
+    }
+    .infoContainer {
+      display: flex;
+      justify-content: center; /* Yatayda ortala */
+      align-items: center; /* Dikeyde ortala */
+      height: 600px; /* İçerik yüksekliği */
+      margin-left: 10em;
+    }
+    .changeContainer {
+      display: flex;
+      justify-content: center; /* Yatayda ortala */
+      align-items: center; /* Dikeyde ortala */
+      height: 600px; /* İçerik yüksekliği */
+      margin-left: 8em;
+      font-weight: 600;
+    }
+
+    .deleteContainer {
+      display: flex;
+      justify-content: center; /* Yatayda ortala */
+      align-items: center; /* Dikeyde ortala */
+      height: 600px; /* İçerik yüksekliği */
+      margin-left: 10em;
+    }
+
+    .deleteCizgi {
+      border: 1px solid black; /* İnce siyah çizgi çerçeve */
+      border-radius: 10px; /* Köşeleri ovalleştirmek için 10 piksel yarıçap */
+      width: 800px; /* Genişlik */
+      height: 200px; /* Yükseklik */
+    }
+    .ticketCizgi {
+      border: 1px solid black; /* İnce siyah çizgi çerçeve */
+      border-radius: 10px; /* Köşeleri ovalleştirmek için 10 piksel yarıçap */
+      width: 00px; /* Genişlik */
+      height: 180px; /* Yükseklik */
+    }
+
+    .infoCizgi {
+      border: 1px solid black; /* İnce siyah çizgi çerçeve */
+      border-radius: 10px; /* Köşeleri ovalleştirmek için 10 piksel yarıçap */
+      width: 800px; /* Genişlik */
+      height: 350px; /* Yükseklik */
+    }
+
+    .changeCizgi {
+      border: 1px solid black; /* İnce siyah çizgi çerçeve */
+      border-radius: 10px; /* Köşeleri ovalleştirmek için 10 piksel yarıçap */
+      width: 800px; /* Genişlik */
+      height: 600px; /* Yükseklik */
+    }
+
+    .changeButton {
+      background-color: #191970;
+      border-radius: 15px;
+      color: white;
+      margin-left: 4em;
+      font-size: 130%;
+    }
+    .deleteButton {
+      background-color: #191970;
+      border-radius: 15px;
+      color: white;
+      font-size: 120%;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <div class="row">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          <div
+            style="
+              background-color: white;
+              border-radius: 20px;
+              height: 30px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              margin-left: 3em;
+            "
+          >
+            <img
+              src="https://www.pngitem.com/pimgs/m/94-947302_png-bus-ticket-traveling-bus-logo-transparent-png.png"
+              alt=""
+              class="img"
+              style="width: 3em; height: 2em; margin-left: 2em; font-size: 70%"
+              routerLink="/anasayfa"
+            />
+            <a
+              routerLink="/anasayfa"
+              class="navbar-brand"
+              style="color: #191970; text-decoration: none; margin-right: 1em"
+              >HUN TRAVEL COMPANY</a
+            >
+          </div>
+          <a
+            routerLink="/ticket"
+            class="navbar-brand"
+            style="color: white; font-size: 115%"
+            >Research Ticket</a
+          >
+          <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a
+                  routerLink="/customer-profile"
+                  class="nav-link active"
+                  style="color: white"
+                  (click)="getUserInfo()"
+                  >Profile</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  routerLink="/home"
+                  class="nav-link active"
+                  style="color: white"
+                  >Log Out</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div class="spacer3"></div>
+    <div class="row">
+      <div
+        class="col-md-2"
+        style="
+          background-color: #191970;
+          color: white;
+          height: 40em;
+          border-radius: 15px;
+        "
+      >
+        <div class="spacer2"></div>
+        <button (click)="ticket()" class="button">Purchased Tickets</button>
+        <p></p>
+        <button (click)="information()" class="button">My Information</button>
+        <p></p>
+        <button (click)="delete()" class="button">Delete Account</button>
+        <p></p>
+        <button (click)="change()" class="button">Update Information</button>
+        <p></p>
+        <button routerLink="/anasayfa" class="button">
+          Hun Travel Company Overview
+        </button>
+      </div>
+
+      <div class="col-md-8">
+        <div *ngIf="currentPage === 'profile'" class="container">
+          <h1>Customer Page</h1>
+        </div>
+
+        <!-- customer information -->
+        <div *ngIf="currentPage === 'information'" class="infoContainer">
+          <div style="width: 500px; padding: 20px" class="infoCizgi">
+            <div class="form-group">
+              <label for="name" class="form-label" style="margin-left: 5em"
+                >Name : {{ this.userInfo.name }}</label
+              >
+            </div>
+            <p></p>
+            <div class="form-group">
+              <label for="surname" class="form-label" style="margin-left: 5em"
+                >Surname : {{ this.userInfo.surname }}</label
+              >
+            </div>
+            <p></p>
+            <div class="form-group">
+              <label for="email" class="form-label" style="margin-left: 5em"
+                >E-mail : {{ this.userInfo.email }}</label
+              >
+            </div>
+            <p></p>
+            <div class="form-group">
+              <label for="password" class="form-label" style="margin-left: 5em"
+                >Password : {{ this.userInfo.password }}</label
+              >
+            </div>
+            <p></p>
+            <div class="form-group">
+              <label for="phone" class="form-label" style="margin-left: 5em"
+                >Phone Number : {{ this.userInfo.phoneNumber }}</label
+              >
+            </div>
+            <p></p>
+            <div class="form-group">
+              <label
+                for="turkishCitizenshipNumber"
+                class="form-label"
+                style="margin-left: 5em"
+                >Turkish Citizenship Number : {{ this.userInfo.tc }}</label
+              >
+            </div>
+            <p></p>
+            <div class="form-group">
+              <label for="gender" class="form-label" style="margin-left: 5em"
+                >Gender : {{ this.userInfo.gender }}</label
+              >
+            </div>
+          </div>
+        </div>
+        <!--customer information-->
+        <!--ticket info-->
+        <div *ngIf="currentPage === 'ticket'" class="outContainer">
+          <div class="purchasedTicketComponent">
+            <div class="ticketOut">
+              <h3 for="ticket" class="nameTitle">Hi {{ userInfo.name }}!</h3>
+              <h4 for="ticket" *ngIf="purchasedTickets.length === 0">
+                You don't have any currently purchased ticket!
+              </h4>
+              <div *ngIf="purchasedTickets.length > 0">
+                <div *ngFor="let ticket of purchasedTickets">
+                  <div class="ticketContainer">
+                    <div class="ticketCity">
+                      {{ ticket.departure }} --> {{ ticket.destination }}
+                    </div>
+                    <div class="departureTime">Departure Time: {{ ticket.departureTime.substring(0, ticket.departureTime.length - 3) }}</div>
+                    <div class="destinationTime">DestinationTime: {{ ticket.destinationTime.substring(0, ticket.destinationTime.length - 3) }}</div>
+                    <div class="seatNumber">Seat Number: {{ ticket.seatNumber }}</div>
+                    <div class="priceDate">
+                      <div class="price">Price: {{ ticket.price }} TL</div>
+                      <div class="date">Date: {{ ticket.departureDate }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--ticket info-->
+        <!--change info-->
+        <div *ngIf="currentPage === 'change'" class="changeContainer">
+          <div style="width: 600px; padding: 20px" class="changeCizgi">
+            <div class="form-group">
+              <label for="name" class="form-label" style="margin-left: 5em"
+                >Name</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                placeholder="Name"
+                style="width: 400px; margin-left: 5em"
+                [(ngModel)]="updatedInfo.name"
+              />
+            </div>
+            <p></p>
+            <div class="form-group">
+              <label for="surname" class="form-label" style="margin-left: 5em"
+                >Surname</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="surname"
+                placeholder="Surname"
+                style="width: 400px; margin-left: 5em"
+                [(ngModel)]="updatedInfo.surname"
+              />
+            </div>
+            <p></p>
+            <div class="form-group">
+              <label for="email" class="form-label" style="margin-left: 5em"
+                >E-mail</label
+              >
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="E-mail"
+                style="width: 400px; margin-left: 5em"
+                [(ngModel)]="updatedInfo.email"
+              />
+            </div>
+            <p></p>
+            <div class="form-group">
+              <label for="password" class="form-label" style="margin-left: 5em"
+                >Password</label
+              >
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                placeholder="Password"
+                style="width: 400px; margin-left: 5em"
+                [(ngModel)]="updatedInfo.password"
+              />
+            </div>
+            <p></p>
+            <div class="form-group">
+              <label for="phone" class="form-label" style="margin-left: 5em"
+                >Phone Number</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="phone"
+                placeholder="Phone Number"
+                style="width: 400px; margin-left: 5em"
+                [(ngModel)]="updatedInfo.phoneNumber"
+              />
+            </div>
+            <p></p>
+            <div class="form-group">
+              <label
+                for="turkishCitizenshipNumber"
+                class="form-label"
+                style="margin-left: 5em"
+                >Turkish Citizenship Number</label
+              >
+              <input
+                type="text"
+                class="form-control"
+                id="turkishCitizenshipNumber"
+                placeholder="Turkish Citizenship Number"
+                style="width: 400px; margin-left: 5em"
+                [(ngModel)]="updatedInfo.tc"
+              />
+            </div>
+            <p></p>
+            <div class="form-group">
+              <button class="changeButton" (click)="updateUser()">
+                Update
+              </button>
+            </div>
+          </div>
+        </div>
+        <!--change info-->
+        <div *ngIf="currentPage == 'delete'" class="deleteContainer">
+          <div style="width: 550px; padding: 20px" class="deleteCizgi">
+            <div class="form-group">
+              <label for="name" class="form-label" style="margin-left: 13em"
+                >Hi {{userInfo.name + " " + userInfo.surname}}!</label
+              >
+              <div class="spacer1"></div>
+              <label for="name" class="form-label" style="margin-left: 3em"
+                >Are you sure delete account? We don't want to lose you.</label
+              >
+            </div>
+            <div class="spacer1"></div>
+            <div class="form-group">
+              <button
+                class="deleteButton"
+                style="margin-left: 9em"
+                (click)="deleteAccount()"
+              >
+                Delete Account
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="spacer1"></div>
+
+  <footer>
+    <div class="row">
+      <div class="col-12 text center">
+        <p style="color: white; text-align: center">
+          HUN TRAVEL COMPANY 2024 ©
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>

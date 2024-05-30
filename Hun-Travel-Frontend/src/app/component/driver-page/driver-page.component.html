@@ -1,0 +1,273 @@
+<head>
+  <style>
+    body {
+      background-color: white;
+    }
+    .navbar {
+      background-color: #191970;
+    }
+    .navbar-brand {
+      margin-left: 30px;
+    }
+    .spacer {
+      margin-bottom: 42px;
+    }
+    .spacer1 {
+      margin-bottom: 1em;
+    }
+    .spacer2 {
+      margin-bottom: 2em;
+    }
+    .spacer3 {
+      margin-bottom: 3em;
+    }
+    .spacer4 {
+      margin-bottom: 4em;
+    }
+    .spacer5 {
+      margin-bottom: 5em;
+    }
+    .spacer6 {
+      margin-bottom: 9em;
+    }
+    .button {
+      margin: 10px;
+      border-radius: 15px;
+      width: 200px;
+      font-size: 16px;
+      height: 44px;
+      background-color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="row">
+    <nav class="navbar navbar-expand-lg col-12">
+      <div class="container-fluid">
+        <div
+          style="
+            background-color: white;
+            border-radius: 20px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 3em;
+          "
+        >
+          <img
+            src="https://www.pngitem.com/pimgs/m/94-947302_png-bus-ticket-traveling-bus-logo-transparent-png.png"
+            alt=""
+            class="img"
+            style="width: 3em; height: 2em; margin-left: 2em; font-size: 70%"
+            routerLink="/anasayfa"
+          />
+          <a
+            routerLink="/driver"
+            class="navbar-brand"
+            style="color: #191970; text-decoration: none; margin-right: 1em"
+            >HUN TRAVEL COMPANY</a
+          >
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a routerLink="/home" class="nav-link active" style="color: white"
+                >Log Out</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="spacer2"></div>
+
+  <div class="row">
+    <div
+      class="col-md-2"
+      style="background-color: #191970; color: white; border-radius: 20px"
+    >
+      <div class="spacer6"></div>
+
+      <button (click)="Seferlerim()" class="button" style="margin-left: 3em">
+        Seferlerim
+      </button>
+      <div class="spacer1" style="color: #191970">.</div>
+      <div class="spacer5" style="color: #191970">.</div>
+
+      <button (click)="Seferler()" class="button" style="margin-left: 3em">
+        Seferler
+      </button>
+      <div style="color: #191970">.</div>
+      <div class="spacer5"></div>
+      <div style="color: #191970">.</div>
+      <div class="spacer5"></div>
+    </div>
+    <div class="col-md-8" *ngIf="driverTravel">
+      <div class="spacer5"></div>
+      <div *ngIf="currentPage === 'Seferlerim'">
+        <div style="overflow: auto; height: 600px; width: 1600px;">
+          <div *ngFor="let travelDriver of driverTravel" style="margin-bottom: 20px;">
+            <div class="cizgi">
+              <div class="row">
+                <div class="spacer3"></div>
+                <h1>
+                  Sefer Bilgileri:
+                  {{
+                    travelDriver.departure.substring(0, 3) +
+                      "-" +
+                      travelDriver.destination.substring(0, 3)
+                  }}
+                </h1>
+                <p></p>
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                  <label>
+                    <strong>Kalkış:</strong> {{ travelDriver.departure }} -
+                    {{ travelDriver.departureTime.substring(0, travelDriver.departureTime.length - 3) }}
+                  </label>
+                  <p></p>
+                  <label>
+                    <strong>Varış:</strong> {{ travelDriver.destination }} -
+                    {{ travelDriver.destinationTime.substring(0, travelDriver.destinationTime.length - 3) }}
+                  </label>
+                </div>
+                <div class="col-md-4">
+                  <label
+                    ><strong>Otobüs Plakası:</strong>
+                    {{ travelDriver.licencePlate }}</label
+                  >
+                  <p></p>
+                  <label
+                    ><strong>Şoför:</strong>
+                    {{
+                      driverInformation.name + " " + driverInformation.surname
+                    }}</label
+                  >
+                </div>
+                <div class="travelInfo">
+                  <p></p>
+                  <h2>Yolcu Listesi</h2>
+                  <p></p>
+                  <div class="userContainer">
+                    <div
+                      class="inline-box"
+                      *ngFor="let user of travelDriver.seatList; let i = index"
+                    >
+                      {{ user && (user.seatNumber + ") " + user.name + " " + user.surname + " - " + user.gender.charAt(0).toUpperCase() + user.gender.slice(1).toLowerCase()) }}
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <p></p>
+                  <h2>Güzergah Bilgisi</h2>
+                  <p></p>
+                  <p>
+                    Yol güzergahı {{ travelDriver.departure }} şehrinden
+                    başlayıp, {{ travelDriver.destination }} şehrinde son bulur.
+                  </p>
+                </div>
+              </div>
+              <p></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="currentPage === 'Seferler'">
+        <div style="overflow: auto; width: 1200px; height: 600px">
+          <div
+            class="card"
+            style="margin-left: 4em"
+            *ngFor="let travel of travelList"
+          >
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-3">
+                  <img
+                    src="https://avatars.mds.yandex.net/i?id=219a1bea96cfa637c1146ef88ff589d699f6bf3c-8439108-images-thumbs&n=13"
+                    [src]=""
+                    alt="..."
+                    style="width: 80px; height: 65px; margin-left: 22px"
+                  />
+                </div>
+
+                <div class="col-md-2">
+                  <div style="margin-right: 35px; font-size: 25px">
+                    {{ travel.departure }}
+                  </div>
+                  <div style="margin-right: 35px; font-size: 25px">
+                    {{ travel.departureTime.substring(0, travel.departureTime.length - 3) }}
+                  </div>
+                </div>
+
+                <div class="col-md-2">
+                  <div style="margin-right: 28px; font-size: 25px">
+                    {{ travel.destination }}
+                  </div>
+                  <div style="margin-right: 35px; font-size: 25px">
+                    {{ travel.destinationTime.substring(0, travel.destinationTime.length - 3) }}
+                  </div>
+                </div>
+
+                <div class="col-md-2">
+                  <div class="spacer1"></div>
+
+                  <img
+                    style="width: 20px; margin-top: 5px"
+                    src="https://avatars.mds.yandex.net/i?id=51894ddfbbce5ee02c5ba86767f562e50fec9855-12644621-images-thumbs&n=13"
+                  />
+                  <img
+                    style="width: 20px; margin-top: 5px"
+                    src="https://cdn3.iconfinder.com/data/icons/auto-parts-icons/390/Seat_Belt-1024.png"
+                  />
+                  <img
+                    style="width: 20px; margin-top: 5px"
+                    src="https://avatars.mds.yandex.net/i?id=b66a2d0066be583c4dbfbfe921365bfa11da450e-12491025-images-thumbs&n=13"
+                  />
+                  <img
+                    style="width: 20px; margin-top: 5px"
+                    src="https://menormakina.com/wp-content/uploads/2021/06/WIFI-Icon.png"
+                  />
+
+                  <img
+                    style="width: 20px; margin-top: 5px"
+                    src="https://cdn2.iconfinder.com/data/icons/food-and-drink-49/100/Waiter-03-1024.png"
+                  />
+                </div>
+                <div class="col-md-2">
+                  <div class="spacer1"></div>
+                  <div style="margin-right: 10px; font-size: 25px">
+                    {{ travel.price }} TL
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="spacer"></div>
+  <footer>
+    <div class="row">
+      <div class="col-12 text center">
+        <p style="color: white; text-align: center">
+          HUN TRAVEL COMPANY 2024 ©
+        </p>
+      </div>
+    </div>
+  </footer>
+</body>
+
+<!-- <div class="userContainer">
+  <div
+    class="inline-box"
+    *ngFor="let user of travelDriver.userList; let i = index"
+  >
+    {{ user && user.name + " " + user.surname }}
+    {{ user && i !== travelDriver.userList.length - 1 && "-" }}
+  </div>
+</div> -->

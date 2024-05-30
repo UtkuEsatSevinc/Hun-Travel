@@ -1,0 +1,568 @@
+<head>
+  <style>
+    body {
+      background-color: #f0f0f0;
+    }
+    .navbar {
+      background-color: #191970;
+      border-radius: 15px;
+    }
+    .navbar-brand {
+      margin-left: 20px;
+    }
+    .spacer {
+      margin-bottom: 5em;
+    }
+    .spacer1 {
+      margin-bottom: 3em;
+    }
+    .spacer2 {
+      margin-bottom: 4em;
+    }
+    .spacer3 {
+      margin-bottom: 1em;
+    }
+    .spacer4 {
+      margin-bottom: 2em;
+    }
+    .div-icerik {
+      position: relative;
+    }
+
+    .div-icerik::after {
+      content: "";
+      position: absolute;
+      top: 0;
+
+      right: 0;
+      bottom: 0;
+      width: 3px; /* Çizginin kalınlığını buradan ayarlayabilirsiniz */
+      background-color: orange; /* Turuncu renk */
+    }
+  </style>
+</head>
+<body>
+  <div class="row">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <div
+          style="
+            background-color: white;
+            border-radius: 20px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 3em;
+          "
+        >
+          <img
+            src="https://www.pngitem.com/pimgs/m/94-947302_png-bus-ticket-traveling-bus-logo-transparent-png.png"
+            alt=""
+            style="width: 3em; height: 2em; margin-left: 2em; font-size: 70%"
+            routerLink="/anasayfa"
+          />
+          <a
+            routerLink="/anasayfa"
+            class="navbar-brand"
+            style="color: #191970; text-decoration: none; margin-right: 1em"
+            >HUN TRAVEL COMPANY</a
+          >
+        </div>
+        <a
+          routerLink="/ticket"
+          class="navbar-brand"
+          style="color: white; font-size: 115%"
+          >Research Ticket</a
+        >
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a
+                routerLink="/customer-profile"
+                class="nav-link active"
+                style="color: white"
+                >Profile</a
+              >
+            </li>
+            <li class="nav-item">
+              <a routerLink="/home" class="nav-link active" style="color: white"
+                >Log Out</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <div class="spacer4"></div>
+  <div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-5" style="margin-right: 2em">
+      <div class="row" style="background-color: white; border-radius: 10px">
+        <div>
+          <div
+            style="
+              display: inline-block;
+              vertical-align: middle;
+              margin-right: 10px;
+              background-color: #b0c4de;
+              width: 30px;
+              height: 25px;
+              text-align: center;
+              margin-top: 40px;
+            "
+          >
+            1
+          </div>
+          <h4
+            style="
+              display: inline-block;
+              vertical-align: middle;
+              margin-top: 2em;
+            "
+          >
+            Passengers
+          </h4>
+          <p></p>
+        </div>
+
+        <div class="row" style="text-align: center">
+          <div class="col-md-5">
+            <div class="form-group">
+              <label for="name" class="form-label">Name</label>
+              <input
+                type="name"
+                class="form-control"
+                id="name"
+                placeholder="Name"
+                [(ngModel)]="payInformation.name"
+              />
+            </div>
+          </div>
+          <div class="col-md-1"></div>
+          <div class="col-md-5">
+            <div class="form-group">
+              <label for="surname" class="form-label">Surname</label>
+              <input
+                type="surname"
+                class="form-control"
+                id="surname"
+                placeholder="Surname"
+                [(ngModel)]="payInformation.surname"
+              />
+            </div>
+          </div>
+          <div class="spacer2"></div>
+        </div>
+      </div>
+
+      <div class="spacer3"></div>
+
+      <div class="row" style="background-color: white; border-radius: 10px">
+        <div>
+          <div
+            style="
+              display: inline-block;
+              vertical-align: middle;
+              margin-right: 10px;
+              background-color: #b0c4de;
+              width: 30px;
+              height: 25px;
+              text-align: center;
+              margin-top: 40px;
+            "
+          >
+            2
+          </div>
+          <h4
+            style="
+              display: inline-block;
+              vertical-align: middle;
+              margin-top: 2em;
+            "
+          >
+            Billing Address
+          </h4>
+          <p></p>
+        </div>
+        <div class="row" style="text-align: center">
+          <div class="col-md-5">
+            <div class="form-group">
+              <label for="country" class="form-label">Country</label>
+              <input
+                type="country"
+                class="form-control"
+                id="country"
+                placeholder="Country"
+                [(ngModel)]="payInformation.country"
+              />
+            </div>
+            <p></p>
+            <div class="form-group">
+              <label for="city" class="form-label">City</label>
+              <input
+                type="city"
+                class="form-control"
+                id="city"
+                placeholder="City"
+                [(ngModel)]="payInformation.city"
+              />
+            </div>
+          </div>
+          <div class="col-md-1"></div>
+          <div class="col-md-5">
+            <label> Address </label>
+            <input
+              type="text"
+              placeholder="Room - Street - Locality"
+              class="form-control"
+              style="margin-top: 10px"
+              [(ngModel)]="payInformation.address"
+            />
+            <p></p>
+            <label> Zip Code </label>
+            <input
+              type="number"
+              placeholder="Zip Code"
+              class="form-control"
+              style="margin-top: 5px"
+              [(ngModel)]="payInformation.zipCode"
+            />
+          </div>
+          <div class="spacer2"></div>
+        </div>
+      </div>
+      <div class="spacer3"></div>
+      <div class="row" style="background-color: white; border-radius: 10px">
+        <div>
+          <div
+            style="
+              display: inline-block;
+              vertical-align: middle;
+              margin-right: 10px;
+              background-color: #b0c4de;
+              width: 30px;
+              height: 25px;
+              text-align: center;
+              margin-top: 40px;
+            "
+          >
+            3
+          </div>
+          <h4
+            style="
+              display: inline-block;
+              vertical-align: middle;
+              margin-top: 2em;
+            "
+          >
+            Contact
+          </h4>
+          <p></p>
+        </div>
+
+        <div class="row" style="text-align: center">
+          <div class="col-md-5">
+            <label> Mail </label>
+            <input
+              type="text"
+              placeholder="Mail "
+              [(ngModel)]="payInformation.mail"
+              class="form-control"
+              style="margin-top: 10px"
+            />
+          </div>
+          <div class="col-md-1"></div>
+          <div class="col-md-5">
+            <label> Phone Number </label>
+            <input
+              type="text"
+              placeholder="Phone Number "
+              [(ngModel)]="payInformation.phoneNumber"
+              class="form-control"
+              style="margin-top: 10px"
+            />
+          </div>
+          <div class="spacer2"></div>
+        </div>
+      </div>
+      <div class="spacer3"></div>
+      <div class="row" style="background-color: white; border-radius: 10px">
+        <div>
+          <div
+            style="
+              display: inline-block;
+              vertical-align: middle;
+              margin-right: 10px;
+              background-color: #b0c4de;
+              width: 30px;
+              height: 25px;
+              text-align: center;
+              margin-top: 40px;
+            "
+          >
+            4
+          </div>
+          <h4
+            style="
+              display: inline-block;
+              vertical-align: middle;
+              margin-top: 2em;
+            "
+          >
+            Payment
+          </h4>
+          <p></p>
+        </div>
+
+        <div class="row" style="text-align: center">
+          <div class="col-md-5">
+            <label> Card Holder Name </label>
+            <input
+              type="text"
+              placeholder="Name On Card "
+              [(ngModel)]="payInformation.cardHolderName"
+              class="form-control"
+              style="margin-top: 10px"
+            />
+            <p></p>
+            <label> Credit Card Number </label>
+            <input
+              type="text"
+              placeholder="xxxx xxxx xxxx xxxx"
+              [(ngModel)]="payInformation.cardNumber"
+              (input)="onCardNumberInput()"
+              class="form-control"
+              style="margin-top: 10px"
+              maxlength="19"
+            />
+            <p></p>
+            <span> CVV </span>
+            <input
+              type="text"
+              maxlength="3"
+              placeholder="XXX"
+              [(ngModel)]="payInformation.cvv"
+              maxlength="3"
+              class="form-control"
+              style="margin-top: 10px"
+            />
+          </div>
+          <div class="col-md-1"></div>
+          <div class="col-md-5">
+            <span>Exp. Month</span>
+            <select
+              id="expYearInput"
+              style="
+                width: 200px;
+                padding: 5px;
+                font-size: 16px;
+                margin-top: 15px;
+              "
+              [(ngModel)]="payInformation.expMonth"
+            >
+              <option *ngFor="let month of months" [value]="month">
+                {{ month }}
+              </option>
+            </select>
+            <p></p>
+            <span>Exp. Year</span>
+            <select
+              id="expYearInput"
+              style="
+                width: 200px;
+                padding: 5px;
+                font-size: 16px;
+                margin-top: 10px;
+              "
+              [(ngModel)]="payInformation.expYear"
+            >
+              <option *ngFor="let year of years" [value]="year">
+                {{ year }}
+              </option>
+            </select>
+            <p></p>
+            <label style="margin-top: 20px">Select Payment Method</label>
+            <select
+              id="expYearInput"
+              style="
+                width: 200px;
+                padding: 5px;
+                font-size: 16px;
+                margin-top: 5px;
+              "
+              [(ngModel)]="payInformation.paymentMethod"
+            >
+              <option value="ADVANCE">Advance</option>
+              <option value="TWO_INSTALLMENTS">Two installments</option>
+              <option value="THREE_INSTALLMENTS">Three installments</option>
+            </select>
+          </div>
+          <div class="spacer2"></div>
+        </div>
+      </div>
+      <div class="spacer5"></div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="spacer2"></div>
+      <h2 style="text-align: center">Your Booking</h2>
+
+      <div class="row" style="text-align: center; border-radius: 10px">
+        <p></p>
+        <h3>{{ travelInformation.departureDate }}</h3>
+        <p></p>
+        <div class="col-md-2"></div>
+        <div class="col-md-2">
+          <div class="circle"></div>
+          <div class="line"></div>
+          <div class="circle filled-circle"></div>
+        </div>
+
+        <div class="col-md-8" style="text-align: center">
+          <h5>{{ travelInformation.departure }}</h5>
+          <h5>{{ travelInformation.departureTime.substring(0, travelInformation.departureTime.length - 3) }}</h5>
+          <div class="spacer4"></div>
+          <h5>{{ travelInformation.destination }}</h5>
+          <h5>{{ travelInformation.destinationTime.substring(0, travelInformation.destinationTime.length - 3) }}</h5>
+        </div>
+        <p></p>
+      </div>
+
+      <div class="spacer2"></div>
+
+      <div class="row">
+        <div class="col-md-8">
+          <h5>Ticket Price :</h5>
+        </div>
+        <div class="col-md-4">
+          <h5>{{ travelInformation.price }} TL</h5>
+        </div>
+      </div>
+      <p></p>
+      <div class="siyahCizgi"></div>
+      <p></p>
+      <div class="row">
+        <div class="col-md-8">
+          <h5>Service :</h5>
+        </div>
+        <div class="col-md-4">
+          <h5>0.00 TL</h5>
+        </div>
+      </div>
+      <p></p>
+      <div class="siyahCizgi"></div>
+      <p></p>
+      <div class="row">
+        <div class="col-md-7">
+          <h3>Total Cost :</h3>
+        </div>
+        <div class="col-md-5">
+          <h3>{{ travelInformation.price }} TL</h3>
+        </div>
+      </div>
+      <div class="spacer2"></div>
+      <div class="row">
+        <div class="col-md-2" style="text-align: center">
+          <input
+            [(ngModel)]="isAccepted"
+            style="width: 2em; height: 2em"
+            type="checkbox"
+          />
+        </div>
+        <div class="col-md-10" style="text-align: center">
+          <label style="font-size: 17px">
+            I declare to have read Privacy Policy and I agree to T&C and T&C of
+            Carriage.
+          </label>
+        </div>
+      </div>
+      <div class="spacer1"></div>
+      <button (click)="payTicketHandler()" class="btn">Pay Now</button>
+
+      <div class="spacer4"></div>
+    </div>
+  </div>
+
+  <div class="col-md-2"></div>
+  <div class="spacer1"></div>
+  <div class="row row-wrapper" style="margin-left: 6em">
+    <div class="col-md-1"></div>
+    <div class="col-md-4">
+      <label style="font-size: 20px">HUN App</label>
+      <div class="image-container">
+        <img
+          style="height: 40px"
+          src="https://cdn-cf.cms.flixbus.com/drupal-assets/footer/googleplay.svg"
+        />
+        <img
+          src="https://cdn-cf.cms.flixbus.com/drupal-assets/footer/appstore.svg"
+        />
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-4" style="margin-left: 5em">
+      <label style="font-size: 20px">HUN On</label>
+      <div class="image-container">
+        <img
+          style="height: 40px"
+          src="https://cdn-cf.cms.flixbus.com/drupal-assets/footer/facebook.svg"
+        />
+        <img
+          style="height: 40px"
+          src="https://cdn-cf.cms.flixbus.com/drupal-assets/footer/insta.svg"
+        />
+        <img
+          style="height: 40px"
+          src="https://cdn-cf.cms.flixbus.com/drupal-assets/footer/youtube.svg"
+        />
+        <img
+          style="height: 40px"
+          src="https://cdn-cf.cms.flixbus.com/drupal-assets/footer/linkedin.svg"
+        />
+        <img
+          style="height: 40px"
+          src="https://cdn-cf.cms.flixbus.com/drupal-assets/footer/x-formerly-twitter.svg"
+        />
+        <img
+          style="height: 40px"
+          src="https://cdn-cf.cms.flixbus.com/drupal-assets/footer/a11y.svg"
+        />
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-1"></div>
+  </div>
+
+  <div class="spacer3"></div>
+  <div class="cizgi">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-2">
+        <label style="font-size: 15px">Contact Us : 0212 212 2121</label>
+      </div>
+      <div class="col-md-3">
+        <label style="font-size: 15px"
+          >Gardenya Neighborhood - Orkide Street - istanbul</label
+        >
+      </div>
+      <div class="col-md-3" style="margin-left: 1em">
+        <label>info&#64;hun.com</label>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+  </div>
+  <div class="spacer4"></div>
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text center">
+          <p style="color: white; text-align: center">
+            HUN TRAVEL COMPANY 2024 ©
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>

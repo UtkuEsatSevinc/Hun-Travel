@@ -1,0 +1,1218 @@
+<head>
+  <style>
+    body {
+      background-color: #f0f0f0; /* Gri arka plan rengi */
+    }
+    .navbar {
+      background-color: #191970;
+      border-radius: 15px;
+    }
+    .navbar-brand {
+      margin-left: 20px; /* HUN Travel yazısına 30 piksel sol boşluk ekle */
+    }
+    .button {
+      margin: 10px;
+      border-radius: 15px;
+      max-width: 45px;
+      font-size: 12px;
+      height: 25px;
+    }
+    .button:active {
+      background-color: pink;
+    }
+    .date-button {
+      width: 10em;
+      margin-bottom: 5px;
+      padding: 10px;
+      border-radius: 15px;
+      background-color: #b0c4de;
+      transition: transform 0.3s ease;
+    }
+    .row-wrapper {
+      max-width: 96%; /* Row'ı kaplayan alanı küçültür */
+      margin: 0 auto; /* Ortalamak için */
+    }
+
+    .date-button:hover {
+      transform: scale(1.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="row">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <div
+          style="
+            background-color: white;
+            border-radius: 20px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 3em;
+          "
+        >
+          <img
+            src="https://www.pngitem.com/pimgs/m/94-947302_png-bus-ticket-traveling-bus-logo-transparent-png.png"
+            alt=""
+            class="img"
+            style="width: 3em; height: 2em; margin-left: 2em; font-size: 70%"
+            routerLink="/anasayfa"
+          />
+          <a
+            routerLink="/anasayfa"
+            class="navbar-brand"
+            style="color: #191970; text-decoration: none; margin-right: 1em"
+            >HUN TRAVEL COMPANY</a
+          >
+        </div>
+        <a
+          routerLink="/ticket"
+          class="navbar-brand"
+          style="color: white; font-size: 115%"
+          >Search Ticket</a
+        >
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a
+                routerLink="/customer-profile"
+                class="nav-link active"
+                style="color: white"
+                >Profile</a
+              >
+            </li>
+            <li class="nav-item">
+              <a routerLink="/home" class="nav-link active" style="color: white"
+                >Log Out</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <div class="spacer1"></div>
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-9">
+      <div>
+        <div class="spacer3"></div>
+
+        <div class="spacer2"></div>
+        <div class="center" style="margin-left: 1em">
+          <form [formGroup]="seferFilterForm">
+            <div class="spacer2"></div>
+
+            <div class="row">
+              <div class="col-md-4">
+                <label for="kalkisYeri" style="margin-left: -20em">From</label>
+                <select
+                  class="form-select"
+                  id="kalkisYeri"
+                  aria-label="Departure"
+                  formControlName="kalkisYeri"
+                  style="width: 29em"
+                  (change)="onSelectDeparture($event)"
+                >
+                  <option value="" [selected]="isCleared">Select a city</option>
+                  <option
+                    value="Istanbul"
+                    [selected]="filterArray.departure === 'Istanbul'"
+                  >
+                    İstanbul
+                  </option>
+                  <option
+                    value="Ankara"
+                    [selected]="filterArray.departure === 'Ankara'"
+                  >
+                    Ankara
+                  </option>
+                  <option
+                    value="Izmir"
+                    [selected]="filterArray.departure === 'Izmir'"
+                  >
+                    İzmir
+                  </option>
+                  <option
+                    value="Edirne"
+                    [selected]="filterArray.departure === 'Edirne'"
+                  >
+                    Edirne
+                  </option>
+                  <option
+                    value="Samsun"
+                    [selected]="filterArray.departure === 'Samsun'"
+                  >
+                    Samsun
+                  </option>
+                  <option
+                    value="Hatay"
+                    [selected]="filterArray.departure === 'Hatay'"
+                  >
+                    Hatay
+                  </option>
+                  <option
+                    value="Antalya"
+                    [selected]="filterArray.departure === 'Antalya'"
+                  >
+                    Antalya
+                  </option>
+                  <option
+                    value="Eskisehir"
+                    [selected]="filterArray.departure === 'Eskisehir'"
+                  >
+                    Eskişehir
+                  </option>
+                  <option
+                    value="Bursa"
+                    [selected]="filterArray.departure === 'Bursa'"
+                  >
+                    Bursa
+                  </option>
+                  <option
+                    value="Sivas"
+                    [selected]="filterArray.departure === 'Sivas'"
+                  >
+                    Sivas
+                  </option>
+                  <option
+                    value="Kars"
+                    [selected]="filterArray.departure === 'Kars'"
+                  >
+                    Kars
+                  </option>
+                  <option
+                    value="Tekirdag"
+                    [selected]="filterArray.departure === 'Tekirdag'"
+                  >
+                    Tekirdağ
+                  </option>
+                </select>
+              </div>
+
+              <div class="col-md-4">
+                <label class="label" for="varisYeri" style="margin-left: -18em"
+                  >To</label
+                >
+                <select
+                  class="form-select"
+                  id="varisYeri"
+                  aria-label="Arrival"
+                  formControlName="varisYeri"
+                  style="width: 29em; margin-left: 3em"
+                  (change)="onSelectDestination($event)"
+                >
+                  <option value="" [selected]="isCleared">Select a city</option>
+                  <option
+                    value="Istanbul"
+                    [selected]="filterArray.destination === 'Istanbul'"
+                  >
+                    İstanbul
+                  </option>
+                  <option
+                    value="Ankara"
+                    [selected]="filterArray.destination === 'Ankara'"
+                  >
+                    Ankara
+                  </option>
+                  <option
+                    value="Izmir"
+                    [selected]="filterArray.destination === 'Izmir'"
+                  >
+                    İzmir
+                  </option>
+                  <option
+                    value="Edirne"
+                    [selected]="filterArray.destination === 'Edirne'"
+                  >
+                    Edirne
+                  </option>
+                  <option
+                    value="Samsun"
+                    [selected]="filterArray.destination === 'Samsun'"
+                  >
+                    Samsun
+                  </option>
+                  <option
+                    value="Hatay"
+                    [selected]="filterArray.destination === 'Hatay'"
+                  >
+                    Hatay
+                  </option>
+                  <option
+                    value="Antalya"
+                    [selected]="filterArray.destination === 'Antalya'"
+                  >
+                    Antalya
+                  </option>
+                  <option
+                    value="Eskisehir"
+                    [selected]="filterArray.destination === 'Eskisehir'"
+                  >
+                    Eskişehir
+                  </option>
+                  <option
+                    value="Bursa"
+                    [selected]="filterArray.destination === 'Bursa'"
+                  >
+                    Bursa
+                  </option>
+                  <option
+                    value="Sivas"
+                    [selected]="filterArray.destination === 'Sivas'"
+                  >
+                    Sivas
+                  </option>
+                  <option
+                    value="Kars"
+                    [selected]="filterArray.destination === 'Kars'"
+                  >
+                    Kars
+                  </option>
+                  <option
+                    value="Tekirdag"
+                    [selected]="filterArray.destination === 'Tekirdag'"
+                  >
+                    Tekirdağ
+                  </option>
+                </select>
+              </div>
+              <div
+                class="col-md-4"
+                style="display: flex; justify-content: center"
+              >
+                <button
+                  type="submit"
+                  class="btn"
+                  style="
+                    background-color: #191970;
+                    color: white;
+                    margin-top: 24px;
+                    width: 7em;
+                    height: 38px;
+                    margin-left: 1em;
+                  "
+                  (click)="filterTravel()"
+                >
+                  Search
+                </button>
+                <button
+                  type="submit"
+                  class="btn"
+                  style="
+                    background-color: #191970;
+                    color: white;
+                    margin-top: 24px;
+                    width: 7em;
+                    height: 38px;
+                    margin-left: 1em;
+                  "
+                  (click)="clearFilter()"
+                >
+                  Clear Filter
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!--    -->
+
+        <div>
+          <div class="spacer2"></div>
+          <div class="spacer2"></div>
+
+          <div class="form-group" style="width: 66em; margin-left: 1em">
+            <input
+              class="form-control"
+              id="biletName"
+              placeholder="Search Trip"
+              [(ngModel)]="filterArray.search"
+            />
+
+            <small *ngIf="filterText" class="form-text text-muted">
+              You are searching for the
+              <strong>{{ filterText }} </strong> travel.
+            </small>
+          </div>
+        </div>
+        <div class="spacer2"></div>
+        <div class="row-wrapper">
+          <div class="row">
+            <div class="col-md-2" *ngFor="let button of dateButtons">
+              <button (click)="filterDate(button.date)" class="date-button">
+                {{ button.name }}
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="spacer1"></div>
+        <div>
+          <div class="row-wrapper">
+            <div class="row">
+              <div class="row" style="margin-left: 65px">
+                <div class="col-md-1"></div>
+                <div class="col-md-2">
+                  <strong style="font-size: 25px">Departure</strong>
+                </div>
+                <div class="col-md-2">
+                  <strong style="font-size: 25px">Destination</strong>
+                </div>
+                <div class="col-md-2">
+                  <strong style="font-size: 25px; margin-left: 23px"
+                    >Features</strong
+                  >
+                </div>
+                <div class="col-md-2">
+                  <strong style="font-size: 25px; margin-left: 25px"
+                    >Price</strong
+                  >
+                </div>
+              </div>
+            </div>
+            <div *ngFor="let travel of travelList" class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-2">
+                    <img
+                      src="https://avatars.mds.yandex.net/i?id=219a1bea96cfa637c1146ef88ff589d699f6bf3c-8439108-images-thumbs&n=13"
+                      alt="..."
+                      style="width: 80px; height: 65px; margin-left: 22px"
+                    />
+                  </div>
+
+                  <div class="col-md-2">
+                    <div style="margin-right: 35px; font-size: 25px">
+                      {{ travel.departure }}
+                    </div>
+                    <div style="margin-right: 35px; font-size: 25px">
+                      {{ travel.departureTime.substring(0, travel.departureTime.length - 3) }}
+                    </div>
+                  </div>
+
+                  <div class="col-md-2">
+                    <div style="margin-right: 28px; font-size: 25px">
+                      {{ travel.destination }}
+                    </div>
+                    <div style="margin-right: 35px; font-size: 25px">
+                      {{ travel.destinationTime.substring(0, travel.destinationTime.length - 3) }}
+                    </div>
+                  </div>
+
+                  <div class="col-md-2">
+                    <div class="spacer1"></div>
+
+                    <img
+                      style="width: 20px; margin-top: 5px"
+                      src="https://avatars.mds.yandex.net/i?id=51894ddfbbce5ee02c5ba86767f562e50fec9855-12644621-images-thumbs&n=13"
+                    />
+                    <img
+                      style="width: 20px; margin-top: 5px"
+                      src="https://cdn3.iconfinder.com/data/icons/auto-parts-icons/390/Seat_Belt-1024.png"
+                    />
+                    <img
+                      style="width: 20px; margin-top: 5px"
+                      src="https://avatars.mds.yandex.net/i?id=b66a2d0066be583c4dbfbfe921365bfa11da450e-12491025-images-thumbs&n=13"
+                    />
+                    <img
+                      style="width: 20px; margin-top: 5px"
+                      src="https://menormakina.com/wp-content/uploads/2021/06/WIFI-Icon.png"
+                    />
+
+                    <img
+                      style="width: 20px; margin-top: 5px"
+                      src="https://cdn2.iconfinder.com/data/icons/food-and-drink-49/100/Waiter-03-1024.png"
+                    />
+                  </div>
+                  <div class="col-md-2">
+                    <div class="spacer1"></div>
+                    <div style="margin-right: 10px; font-size: 25px">
+                      {{ travel.price }} TL
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="spacer1"></div>
+                    <a
+                      (click)="getUserTravel(travel.id, travel)"
+                      class="btn"
+                      style="background-color: #191970; color: white"
+                      >View Ticket</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-2" *ngIf="showDetails">
+      <div>
+        <div class="spacer5"></div>
+        <label style="font-size: 28px; margin-left: 5px"
+          >Select Your Seat</label
+        >
+        <div class="bus" style="margin-right: 1em">
+          <div class="container" *ngIf="seats.length > 0 && userInformation">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="column">
+                  <div class="row">
+                    <div class="spacer1"></div>
+                    <div class="car-door1">
+                      <div class="door-handle1"></div>
+                    </div>
+                    <div class="spacer1"></div>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[0].id, seats[0].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[0].gender === 'MALE'
+                            ? 'blue'
+                            : seats[0].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[0]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[0].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[0].isClickable"
+                    >
+                      {{ seats[0].seatNumber }}
+                    </button>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[3].id, seats[3].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[3].gender === 'MALE'
+                            ? 'blue'
+                            : seats[3].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[3]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[3].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[3].isClickable"
+                    >
+                      {{ seats[3].seatNumber }}
+                    </button>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[6].id, seats[6].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                        seats[6].gender === 'MALE' ? 'blue' : seats[6].gender === 'FEMALE' ? '#DE3163' : buttons[6] ? 'green' : '#EFEFEF',
+                        'color':
+                        seats[6].gender ? 'white' : 'black',
+                      }"
+                      [disabled]="!seats[6].isClickable"
+                    >
+                      {{ seats[6].seatNumber }}
+                    </button>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[9].id, seats[9].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[9].gender === 'MALE'
+                            ? 'blue'
+                            : seats[9].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[9]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[9].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[9].isClickable"
+                    >
+                      {{ seats[9].seatNumber }}
+                    </button>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[12].id, seats[12].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[12].gender === 'MALE'
+                            ? 'blue'
+                            : seats[12].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[12]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[12].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[12].isClickable"
+                    >
+                      {{ seats[12].seatNumber }}
+                    </button>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[15].id, seats[15].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[15].gender === 'MALE'
+                            ? 'blue'
+                            : seats[15].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[15]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[15].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[15].isClickable"
+                    >
+                      {{ seats[15].seatNumber }}
+                    </button>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[18].id, seats[18].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[18].gender === 'MALE'
+                            ? 'blue'
+                            : seats[18].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[18]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[18].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[18].isClickable"
+                    >
+                      {{ seats[18].seatNumber }}
+                    </button>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[21].id, seats[21].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[21].gender === 'MALE'
+                            ? 'blue'
+                            : seats[21].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[21]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[21].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[21].isClickable"
+                    >
+                      {{ seats[21].seatNumber }}
+                    </button>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[23].id, seats[23].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[23].gender === 'MALE'
+                            ? 'blue'
+                            : seats[23].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[23]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[23].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[23].isClickable"
+                    >
+                      {{ seats[23].seatNumber }}
+                    </button>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[25].id, seats[25].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[25].gender === 'MALE'
+                            ? 'blue'
+                            : seats[25].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[25]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[25].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[25].isClickable"
+                    >
+                      {{ seats[25].seatNumber }}
+                    </button>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[28].id, seats[28].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[28].gender === 'MALE'
+                            ? 'blue'
+                            : seats[28].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[28]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[28].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[28].isClickable"
+                    >
+                      {{ seats[28].seatNumber }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="column">
+                  <div class="row">
+                    <div class="spacer2"></div>
+                    <div class="spacer3"></div>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[1].id, seats[1].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[1].gender === 'MALE'
+                            ? 'blue'
+                            : seats[1].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[1]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[1].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[1].isClickable"
+                    >
+                      {{ seats[1].seatNumber }}
+                    </button>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[4].id, seats[4].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[4].gender === 'MALE'
+                            ? 'blue'
+                            : seats[4].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[4]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[4].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[4].isClickable"
+                    >
+                      {{ seats[4].seatNumber }}
+                    </button>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[7].id, seats[7].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[7].gender === 'MALE'
+                            ? 'blue'
+                            : seats[7].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[7]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[7].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[7].isClickable"
+                    >
+                      {{ seats[7].seatNumber }}
+                    </button>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[10].id, seats[10].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[10].gender === 'MALE'
+                            ? 'blue'
+                            : seats[10].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[10]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[10].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[10].isClickable"
+                    >
+                      {{ seats[10].seatNumber }}
+                    </button>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[13].id, seats[13].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[13].gender === 'MALE'
+                            ? 'blue'
+                            : seats[13].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[13]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[13].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[13].isClickable"
+                    >
+                      {{ seats[13].seatNumber }}
+                    </button>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[16].id, seats[16].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[16].gender === 'MALE'
+                            ? 'blue'
+                            : seats[16].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[16]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[16].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[16].isClickable"
+                    >
+                      {{ seats[16].seatNumber }}
+                    </button>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[19].id, seats[19].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[19].gender === 'MALE'
+                            ? 'blue'
+                            : seats[19].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[19]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[19].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[19].isClickable"
+                    >
+                      {{ seats[19].seatNumber }}
+                    </button>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[22].id, seats[22].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[22].gender === 'MALE'
+                            ? 'blue'
+                            : seats[22].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[22]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[22].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[22].isClickable"
+                    >
+                      {{ seats[22].seatNumber }}
+                    </button>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[24].id, seats[24].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[24].gender === 'MALE'
+                            ? 'blue'
+                            : seats[24].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[24]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[24].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[24].isClickable"
+                    >
+                      {{ seats[24].seatNumber }}
+                    </button>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[26].id, seats[26].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[26].gender === 'MALE'
+                            ? 'blue'
+                            : seats[26].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[26]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[26].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[26].isClickable"
+                    >
+                      {{ seats[26].seatNumber }}
+                    </button>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[29].id, seats[29].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[29].gender === 'MALE'
+                            ? 'blue'
+                            : seats[29].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[29]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[29].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[29].isClickable"
+                    >
+                      {{ seats[29].seatNumber }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2"></div>
+              <div class="col-md-3">
+                <div class="column">
+                  <div class="row">
+                    <div class="spacer2"></div>
+                    <div class="car-door">
+                      <div class="door-handle"></div>
+                    </div>
+
+                    <div class="spacer2"></div>
+
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[2].id, seats[2].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[2].gender === 'MALE'
+                            ? 'blue'
+                            : seats[2].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[2]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[2].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[2].isClickable"
+                    >
+                      {{ seats[2].seatNumber }}
+                    </button>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[5].id, seats[5].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[5].gender === 'MALE'
+                            ? 'blue'
+                            : seats[5].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[5]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[5].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[5].isClickable"
+                    >
+                      {{ seats[5].seatNumber }}
+                    </button>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[8].id, seats[8].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[8].gender === 'MALE'
+                            ? 'blue'
+                            : seats[8].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[8]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[8].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[8].isClickable"
+                    >
+                      {{ seats[8].seatNumber }}
+                    </button>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[11].id, seats[11].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[11].gender === 'MALE'
+                            ? 'blue'
+                            : seats[11].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[11]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[11].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[11].isClickable"
+                    >
+                      {{ seats[11].seatNumber }}
+                    </button>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[14].id, seats[14].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[14].gender === 'MALE'
+                            ? 'blue'
+                            : seats[14].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[14]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[14].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[14].isClickable"
+                    >
+                      {{ seats[14].seatNumber }}
+                    </button>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[17].id, seats[17].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[17].gender === 'MALE'
+                            ? 'blue'
+                            : seats[17].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[17]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[17].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[17].isClickable"
+                    >
+                      {{ seats[17].seatNumber }}
+                    </button>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[20].id, seats[20].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[20].gender === 'MALE'
+                            ? 'blue'
+                            : seats[20].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[20]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[20].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[20].isClickable"
+                    >
+                      {{ seats[20].seatNumber }}
+                    </button>
+
+                    <div class="spacer3"></div>
+                    <div class="car-door">
+                      <div class="door-handle"></div>
+                    </div>
+                    <div class="spacer2"></div>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[27].id, seats[27].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[27].gender === 'MALE'
+                            ? 'blue'
+                            : seats[27].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[27]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[27].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[27].isClickable"
+                    >
+                      {{ seats[27].seatNumber }}
+                    </button>
+                    <button
+                      class="button"
+                      (click)="
+                        selectSeatNumber(seats[30].id, seats[30].seatNumber)
+                      "
+                      [ngStyle]="{
+                        'background-color':
+                          seats[30].gender === 'MALE'
+                            ? 'blue'
+                            : seats[30].gender === 'FEMALE'
+                            ? '#DE3163'
+                            : buttons[30]
+                            ? 'green'
+                            : '#EFEFEF',
+                        color: seats[30].gender ? 'white' : 'black'
+                      }"
+                      [disabled]="!seats[30].isClickable"
+                    >
+                      {{ seats[30].seatNumber }}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="spacer3"></div>
+        <div class="center" style="margin-right: 1em">
+          <p class="custom-heading">From : {{ selectedBilet?.departure }}</p>
+
+          <p class="custom-heading">Where: {{ selectedBilet?.destination }}</p>
+
+          <p class="custom-heading">Price: {{ selectedBilet?.price }} TR</p>
+
+          <a
+            (click)="sendData(selectedSeatId)"
+            class="btn"
+            style="background-color: #191970; color: white"
+            >Continue</a
+          >
+        </div>
+      </div>
+      <div class="spacer5"></div>
+    </div>
+  </div>
+
+  <div class="spacer6"></div>
+
+  <div class="row row-wrapper" style="margin-left: 6em">
+    <div class="col-md-1"></div>
+    <div class="col-md-4">
+      <label style="font-size: 20px">HUN App</label>
+      <div class="image-container">
+        <img
+          style="height: 40px"
+          src="https://cdn-cf.cms.flixbus.com/drupal-assets/footer/googleplay.svg"
+        />
+        <img
+          src="https://cdn-cf.cms.flixbus.com/drupal-assets/footer/appstore.svg"
+        />
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-4" style="margin-left: 5em">
+      <label style="font-size: 20px">HUN On</label>
+      <div class="image-container">
+        <img
+          style="height: 40px"
+          src="https://cdn-cf.cms.flixbus.com/drupal-assets/footer/facebook.svg"
+        />
+        <img
+          style="height: 40px"
+          src="https://cdn-cf.cms.flixbus.com/drupal-assets/footer/insta.svg"
+        />
+        <img
+          style="height: 40px"
+          src="https://cdn-cf.cms.flixbus.com/drupal-assets/footer/youtube.svg"
+        />
+        <img
+          style="height: 40px"
+          src="https://cdn-cf.cms.flixbus.com/drupal-assets/footer/linkedin.svg"
+        />
+        <img
+          style="height: 40px"
+          src="https://cdn-cf.cms.flixbus.com/drupal-assets/footer/x-formerly-twitter.svg"
+        />
+        <img
+          style="height: 40px"
+          src="https://cdn-cf.cms.flixbus.com/drupal-assets/footer/a11y.svg"
+        />
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-1"></div>
+  </div>
+
+  <div class="spacer3"></div>
+  <div class="cizgi">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-2">
+        <label style="font-size: 15px">Contact Us : 0212 212 2121</label>
+      </div>
+      <div class="col-md-3">
+        <label style="font-size: 15px"
+          >Gardenya Neighborhood - Orkide Street - istanbul</label
+        >
+      </div>
+      <div class="col-md-3" style="margin-left: 1em">
+        <label>info&#64;hun.com</label>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+  </div>
+  <div class="spacer2"></div>
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text center">
+          <p style="color: white; text-align: center">
+            HUN TRAVEL COMPANY 2024 ©
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>

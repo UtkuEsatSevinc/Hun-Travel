@@ -1,0 +1,754 @@
+<head>
+  <style>
+    .navbar {
+      background-color: #191970;
+    }
+    .btn {
+      font-size: 20px; /* Metin boyutunu 20 piksel olarak ayarlar */
+    }
+
+    .navbar-brand {
+      margin-left: 20px; /* HUN Travel yazısına 30 piksel sol boşluk ekle */
+    }
+
+    .turuncu-cizgi {
+      border: 1px solid orange; /* İnce turuncu çizgi */
+    }
+
+    .spacer {
+      margin-bottom: 4em;
+    }
+    .spacer1 {
+      margin-bottom: 2em;
+    }
+  </style>
+</head>
+<body>
+  <div class="row">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <div
+          style="
+            background-color: white;
+            border-radius: 20px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+
+            margin-left: 3em;
+          "
+        >
+          <img
+            src="https://www.pngitem.com/pimgs/m/94-947302_png-bus-ticket-traveling-bus-logo-transparent-png.png"
+            alt=""
+            class="img"
+            style="width: 3em; height: 2em; margin-left: 2em; font-size: 70%"
+            routerLink="/anasayfa"
+          />
+          <a
+            routerLink="/anasayfa"
+            class="navbar-brand"
+            style="color: #191970; text-decoration: none; margin-right: 1em"
+            >HUN TRAVEL COMPANY</a
+          >
+        </div>
+        <a
+          routerLink="/ticket"
+          class="navbar-brand"
+          style="color: white; font-size: 115%"
+        >
+          Search Ticket</a
+        >
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a
+                routerLink="/customer-profile"
+                class="nav-link active"
+                style="color: white"
+                >Profile</a
+              >
+            </li>
+            <li class="nav-item">
+              <a
+                routerLink="/home"
+                class="nav-link active"
+                style="color: white"
+                (click)="logout()"
+                >Log Out</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="banner">
+    <div class="container" style="margin-right: 7em">
+      <div class="baslık-cerceve">
+        <h1>Welcome to HUN Travel Company</h1>
+        <div class="spacer1"></div>
+        <div></div>
+        <div class="spacer1"></div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <label
+              style="margin-right: 4em; font-size: 20px"
+              class="label"
+              for="kalkisYeri"
+              >From</label
+            >
+            <select
+              class="form-select"
+              id="kalkisYeri"
+              aria-label="Departure"
+              formControlName="kalkisYeri"
+              style="width: 17em; margin-left: 3em"
+              (change)="onSelectDeparture($event)"
+            >
+              <option value="" [selected]="isSelected">Select a city</option>
+              <option value="Istanbul">İstanbul</option>
+              <option value="Ankara">Ankara</option>
+              <option value="Izmir">İzmir</option>
+              <option value="Antalya">Antalya</option>
+              <option value="Eskisehir">Eskişehir</option>
+              <option value="Samsun">Samsun</option>
+              <option value="Hatay">Hatay</option>
+              <option value="Bursa">Bursa</option>
+              <option value="Sivas">Sivas</option>
+              <option value="Kars">Kars</option>
+              <option value="Edirne">Edirne</option>
+              <option value="Tekirdag">Tekirdağ</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label
+              style="margin-right: 6em; font-size: 20px"
+              class="label"
+              for="varisYeri"
+              >To</label
+            >
+            <select
+              class="form-select"
+              id="varisYeri"
+              aria-label="Arrival"
+              formControlName="varisYeri"
+              style="width: 17em; margin-left: 3em"
+              (change)="onSelectDestination($event)"
+            >
+              <option value="" [selected]="isSelected2">Select a city</option>
+              <option value="Istanbul">İstanbul</option>
+              <option value="Ankara">Ankara</option>
+              <option value="Izmir">İzmir</option>
+              <option value="Antalya">Antalya</option>
+              <option value="Eskisehir">Eskişehir</option>
+              <option value="Samsun">Samsun</option>
+              <option value="Hatay">Hatay</option>
+              <option value="Bursa">Bursa</option>
+              <option value="Sivas">Sivas</option>
+              <option value="Kars">Kars</option>
+              <option value="Edirne">Edirne</option>
+              <option value="Tekirdag">Tekirdağ</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <button
+              routerLink="/ticket"
+              type="submit"
+              class="btn"
+              style="
+                background-color: #191970;
+                color: white;
+                margin-top: 25px;
+                width: 7em;
+              "
+              (click)="sendFilter()"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container pt-3 text-center" id="service">
+    <p></p>
+    <h1>Online Ticket Platform</h1>
+    <div class="spacer1"></div>
+    <div class="row">
+      <div class="col-md-4 col-sm-4 imgCard">
+        <img
+          style="width: 200px"
+          class="img-flud"
+          src="https://thumbs.dreamstime.com/b/big-white-coach-tour-bus-bus-tickets-white-background-d-rendering-big-white-coach-tour-bus-bus-tickets-d-rendering-100894463.jpg"
+        />
+        <h3><a> Ticket Transactions</a></h3>
+        <div class="turuncu-cizgi"></div>
+        <p></p>
+        <p>
+          You can quickly and easily complete your ticket transactions online,
+          change your ticket, convert it to an open ticket, and cancel it.
+        </p>
+      </div>
+      <div class="col-md-4 col-sm-4 imgCard">
+        <img
+          style="width: 200px"
+          class="img-flud"
+          src="http://ncdreklam.com/rsm/icerik/buyuk/icerik_137.jpg"
+        />
+        <h3><a>HUN Life Travel Magazine</a></h3>
+        <div class="turuncu-cizgi"></div>
+        <p></p>
+        <p>
+          Exciting news from HUN Life awaits you, covering travel trends,
+          culture, art, and inspiring stories from various destinations.
+        </p>
+      </div>
+      <div class="col-md-4 col-sm-4 imgCard">
+        <img
+          style="width: 200px"
+          class="img-flud"
+          src="https://avatars.mds.yandex.net/i?id=37f4cbb4e23b4d641d4fb6692e8b9cf449cc5e74-12528274-images-thumbs&n=13"
+        />
+        <h3><a> HUN Travel on Social Media</a></h3>
+        <div class="turuncu-cizgi"></div>
+        <p></p>
+        <p>
+          You can follow HUN Travel on social media accounts and stay updated
+          with the latest developments. Be ready for surprises at any moment!
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <div
+    class="container pt-3 text-center overflow-auto"
+    style="height: 400px"
+    id="portfolio"
+  >
+    <h1>Portfolio</h1>
+    <div class="spacer1"></div>
+    <div class="row">
+      <div class="col-md-3 col-sm-3">
+        <img
+          src="https://avatars.mds.yandex.net/i?id=ded8388ca4647d456d9e79a59552c093ed0148fb-12480075-images-thumbs&n=13"
+          class="img-thumbnail"
+        />
+      </div>
+      <div class="col-md-3 col-sm-3">
+        <img
+          src="https://avatars.mds.yandex.net/i?id=b46ff46bc1f3e05f7c67e37c5b38c9decf3d1fca-8205921-images-thumbs&n=13"
+          class="img-thumbnail"
+        />
+      </div>
+      <div class="col-md-3 col-sm-3">
+        <img
+          src="https://avatars.mds.yandex.net/i?id=d9008fbf1172b0a9c0b7a591906b1d2b06e76597-5234911-images-thumbs&n=13"
+          class="img-thumbnail"
+        />
+      </div>
+      <div class="col-md-3 col-sm-3">
+        <img
+          src="https://i.pinimg.com/originals/28/bf/b9/28bfb927494cf63d415f8afa74089fc2.jpg"
+          class="img-thumbnail"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 col-sm-3">
+        <img
+          src="https://i.pinimg.com/originals/54/fc/f1/54fcf119bef06de0d2c0d0b8608f81c1.jpg"
+          class="img-thumbnail"
+        />
+      </div>
+      <div class="col-md-3 col-sm-3">
+        <img
+          src="https://i.pinimg.com/originals/7f/5a/8e/7f5a8e2908d675d14db1138d86d6c928.jpg"
+          class="img-thumbnail"
+        />
+      </div>
+      <div class="col-md-3 col-sm-3">
+        <img
+          src="https://www.theautochannel.com/news/2008/01/30/076197.1-lg.jpg"
+          class="img-thumbnail"
+        />
+      </div>
+      <div class="col-md-3 col-sm-3">
+        <img
+          src="https://myskillsconnect.com/uploads/posts/2023-06/1685760625_myskillsconnect-com-p-foto-avtobusa-vnutri-dlya-dalnikh-poezdok-15.jpg"
+          class="img-thumbnail"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3 col-sm-3">
+        <img
+          src="https://www.mmlimo.com/wp-content/uploads/2014/07/Executive-Mercedes-Sprinter-inside-1.png"
+          class="img-thumbnail"
+        />
+      </div>
+      <div class="col-md-3 col-sm-3">
+        <img
+          src="https://i.pinimg.com/originals/8e/3c/8a/8e3c8a62bd8eb9790eeb8e775ba62190.jpg"
+          class="img-thumbnail"
+        />
+      </div>
+      <div class="col-md-3 col-sm-3">
+        <img
+          src="https://static.wixstatic.com/media/f4a79b_9e208047e0c744419e7796930a3cd0eb~mv2_d_4306_3229_s_4_2.jpg/v1/fill/w_2500,h_1874,al_c/f4a79b_9e208047e0c744419e7796930a3cd0eb~mv2_d_4306_3229_s_4_2.jpg"
+          class="img-thumbnail"
+        />
+      </div>
+      <div class="col-md-3 col-sm-3">
+        <img
+          src="https://i.pinimg.com/736x/da/7a/82/da7a828855b88cd3f194c78b59b199ac.jpg"
+          class="img-thumbnail"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="spacer"></div>
+  <div class="container pt-3 text-center" id="about">
+    <div class="divin-cizgi">
+      <div class="spacer"></div>
+      <h1>About Us</h1>
+      <div class="spacer1"></div>
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+          <p style="font-size: 20px">
+            HUN Travel, the leading company in the transportation sector in
+            Turkey, is the largest land transportation company in terms of
+            revenue and number of passengers carried. With a fleet of 1,221
+            buses, including 495 owned by the company itself, HUN Travel
+            maintains a strong position in the industry.
+          </p>
+        </div>
+        <div class="col-md-1"></div>
+      </div>
+      <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+          <p style="font-size: 20px">
+            With a young fleet of vehicles with an average age of 3 years, HUN
+            Travel benefits from the strong capital of its parent company, HUN
+            Holding, and an efficient organizational structure. Additionally,
+            with over 1,000 active agencies spread across 79 provinces in
+            Turkey, HUN Travel has a significant advantage over its competitors
+            with its domestic and international ticket sales network.
+          </p>
+        </div>
+        <div class="col-md-1"></div>
+      </div>
+    </div>
+  </div>
+  <div class="spacer1"></div>
+
+  <div class="container pt-3 text-center" id="about">
+    <h2>Some Travel Cities</h2>
+    <div class="spacer1"></div>
+
+    <!-- birini satır-->
+    <div class="row">
+      <div class="col-md-3 col-sm-3">
+        <div
+          style="
+            position: relative;
+            width: 305px;
+            height: 250px;
+            margin-left: 20px;
+          "
+          class="imgCard"
+        >
+          <img
+            src="https://d3rh8btizouuof.cloudfront.net/images/sehir/ankara.jpg"
+            alt="Ankara"
+            style="width: 100%; height: 100%"
+          />
+          <button
+            style="
+              position: absolute;
+              top: 10px;
+              left: 10px;
+              background-color: rgba(255, 255, 255, 0.5);
+              padding: 5px;
+              border-radius: 10px;
+              border: none;
+            "
+          >
+            Ankara
+          </button>
+          <span>Check our travel to visit the capital of Turkey.</span>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-3">
+        <div
+          class="imgCard"
+          style="position: relative; width: 305px; height: 250px"
+        >
+          <img
+            src="https://d3rh8btizouuof.cloudfront.net/images/sehir/bursa.jpg"
+            alt="Bursa"
+            style="width: 100%; height: 100%; margin-left: 10px"
+          />
+          <button
+            style="
+              position: absolute;
+              top: 10px;
+              left: 10px;
+              background-color: rgba(255, 255, 255, 0.5);
+              padding: 5px;
+              margin-left: 10px;
+              border-radius: 10px;
+              border: none;
+            "
+          >
+            Bursa
+          </button>
+          <span style="margin-left: 10px">
+            Check our travel to explore the natural beauty.
+          </span>
+        </div>
+      </div>
+      <div class="col-md-6 col-sm-6">
+        <div
+          style="position: relative; width: 585px; height: 250px"
+          class="imgCard"
+        >
+          <img
+            src="https://d3rh8btizouuof.cloudfront.net/images/sehir/istanbul.jpg"
+            alt="Istanbul"
+            style="width: 627px; height: 100%"
+          />
+
+          <button
+            style="
+              position: absolute;
+              top: 10px;
+              left: 10px;
+              background-color: rgba(255, 255, 255, 0.5);
+              padding: 5px;
+              border-radius: 10px;
+              border: none;
+            "
+          >
+            Istanbul
+          </button>
+          <span style="width: 627px; margin-left: 21px"
+            >Check our travel to see the city, one of the wonders of the
+            world.</span
+          >
+        </div>
+      </div>
+    </div>
+    <!--birinci satır bitiş-->
+    <div>
+      <div style="margin-bottom: 8px"></div>
+    </div>
+    <!--ikinci satır-->
+    <div class="row">
+      <!--birinci sütun-->
+      <div class="col-md-6 col-sm-6">
+        <div
+          style="
+            position: relative;
+            width: 320px;
+            height: 250px;
+            margin-left: 20px;
+          "
+          class="imgCard1"
+        >
+          <img
+            src="https://d3rh8btizouuof.cloudfront.net/images/sehir/izmir.jpg"
+            alt="İzmir"
+            style="width: 625px; height: 508px"
+          />
+          <button
+            style="
+              position: absolute;
+              top: 10px;
+              left: 10px;
+              background-color: rgba(255, 255, 255, 0.5);
+              padding: 5px;
+              border-radius: 10px;
+              border: none;
+            "
+          >
+            İzmir
+          </button>
+          <span>Check our travel to see the pearl of the Aegean, Izmir.</span>
+        </div>
+      </div>
+      <!--ikinci sütun-->
+      <div class="col-md-3 col-sm-3">
+        <div class="row">
+          <div
+            style="position: relative; width: 320px; height: 250px"
+            class="imgCard"
+          >
+            <img
+              src="https://d3rh8btizouuof.cloudfront.net/images/sehir/afyon.jpg"
+              alt="Afyon"
+              style="width: 107%; height: 100%"
+            />
+            <button
+              style="
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                background-color: rgba(255, 255, 255, 0.7);
+                padding: 5px;
+                margin-left: 15px;
+                border-radius: 10px;
+                border: none;
+              "
+            >
+              Afyon
+            </button>
+            <span style="margin-left: 10px; width: 99%">
+              Check our travel to see the historical beauties.
+            </span>
+          </div>
+        </div>
+        <div style="margin-bottom: 8px"></div>
+        <div class="row">
+          <div
+            style="position: relative; width: 320px; height: 250px"
+            class="imgCard"
+          >
+            <img
+              src="https://d3rh8btizouuof.cloudfront.net/images/sehir/denizli.jpg"
+              alt="Denizli"
+              style="width: 107%; height: 100%"
+            />
+            <button
+              style="
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                background-color: rgba(255, 255, 255, 0.7);
+                padding: 5px;
+                margin-left: 15px;
+                border-radius: 10px;
+                border: none;
+              "
+            >
+              Denizli
+            </button>
+            <span style="margin-left: 10px; width: 99%">
+              Check our travel to see natural beauties.</span
+            >
+          </div>
+        </div>
+      </div>
+      <!--üçüncü sütun-->
+      <div class="col-md-3 col-sm-3">
+        <div class="row">
+          <div
+            style="
+              position: relative;
+              width: 300px;
+              height: 250px;
+              margin-right: 15px;
+            "
+            class="imgCard"
+          >
+            <img
+              src="https://d3rh8btizouuof.cloudfront.net/images/sehir/canakkale.jpg"
+              alt="Çanakkale"
+              style="width: 107%; height: 100%; margin-left: 3px"
+            />
+            <button
+              style="
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                background-color: rgba(255, 255, 255, 0.7);
+                padding: 5px;
+                margin-left: 18px;
+                border-radius: 10px;
+                border: none;
+              "
+            >
+              Çanakkale
+            </button>
+            <span style="margin-left: 13px; width: 98.5%">
+              Check our travel to see the azure seas.</span
+            >
+          </div>
+        </div>
+        <div style="margin-bottom: 8px"></div>
+        <div class="row">
+          <div
+            style="position: relative; width: 300px; height: 250px"
+            class="imgCard"
+          >
+            <img
+              src="https://d3rh8btizouuof.cloudfront.net/images/sehir/antalya.jpg"
+              alt="Antalya"
+              style="width: 107%; height: 100%; margin-left: 3px"
+            />
+            <button
+              style="
+                border: none;
+                position: absolute;
+                top: 10px;
+                left: 10px;
+                background-color: rgba(255, 255, 255, 0.7);
+                padding: 5px;
+                margin-left: 17px;
+                border-radius: 10px;
+              "
+            >
+              Antalya
+            </button>
+            <span style="margin-left: 13px; width: 98.5%">
+              Check our travel to visit gorgeous city.</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--ikinci satır bitiş-->
+  </div>
+
+  <div class="spacer"></div>
+  <div class="container pt-3 text-center" id="contact">
+    <div class="divin-cizgi1">
+      <div class="spacer"></div>
+      <h1>Contact Us</h1>
+      <div class="spacer1"></div>
+      <div class="row">
+        <div class="col-md-5">
+          <img
+            src="https://avatars.mds.yandex.net/i?id=16981d32533c84a5df31f831a406a72e-5248827-images-thumbs&n=13"
+            class="img-flud"
+            style="height: 77%"
+          />
+        </div>
+        <div class="col-md-7">
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Name"
+              style="width: 40em"
+              [(ngModel)]="contactInfo.name"
+            /><br />
+            <input
+              type="email"
+              class="form-control"
+              placeholder="E-mail"
+              style="width: 40em"
+              [(ngModel)]="contactInfo.email"
+            /><br />
+            <input
+              type="tel"
+              class="form-control"
+              placeholder="Phone Number"
+              style="width: 40em"
+              [(ngModel)]="contactInfo.phoneNumber"
+            /><br />
+            <textarea
+              class="form-control"
+              placeholder="Type Your Message Here "
+              style="width: 40em"
+              [(ngModel)]="contactInfo.message"
+            ></textarea
+            ><br />
+            <button
+              class="btn btn-primary"
+              type="submit"
+              (click)="sendContact()"
+            >
+              Send
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="spacer1"></div>
+  <div class="row row-wrapper" style="margin-left: 6em">
+    <div class="spacer1"></div>
+    <div class="col-md-1"></div>
+    <div class="col-md-4">
+      <label style="font-size: 20px">HUN App</label>
+      <div class="image-container">
+        <img
+          style="height: 40px"
+          src="https://cdn-cf.cms.flixbus.com/drupal-assets/footer/googleplay.svg"
+        />
+        <img
+          src="https://cdn-cf.cms.flixbus.com/drupal-assets/footer/appstore.svg"
+        />
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-4" style="margin-left: 5em">
+      <label style="font-size: 20px">HUN On</label>
+      <div class="image-container">
+        <img
+          style="height: 40px"
+          src="https://cdn-cf.cms.flixbus.com/drupal-assets/footer/facebook.svg"
+        />
+        <img
+          style="height: 40px"
+          src="https://cdn-cf.cms.flixbus.com/drupal-assets/footer/insta.svg"
+        />
+        <img
+          style="height: 40px"
+          src="https://cdn-cf.cms.flixbus.com/drupal-assets/footer/youtube.svg"
+        />
+        <img
+          style="height: 40px"
+          src="https://cdn-cf.cms.flixbus.com/drupal-assets/footer/linkedin.svg"
+        />
+        <img
+          style="height: 40px"
+          src="https://cdn-cf.cms.flixbus.com/drupal-assets/footer/x-formerly-twitter.svg"
+        />
+        <img
+          style="height: 40px"
+          src="https://cdn-cf.cms.flixbus.com/drupal-assets/footer/a11y.svg"
+        />
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+    <div class="col-md-1"></div>
+  </div>
+  <div class="spacer1"></div>
+
+  <div class="spacer3"></div>
+  <div class="cizgi">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-2">
+        <label style="font-size: 15px">Contact Us : 0212 212 2121</label>
+      </div>
+      <div class="col-md-3">
+        <label style="font-size: 15px"
+          >Gardenya Neighborhood - Orkide Street - istanbul</label
+        >
+      </div>
+      <div class="col-md-3" style="margin-left: 1em">
+        <label>info&#64;hun.com</label>
+      </div>
+      <div class="col-md-1"></div>
+    </div>
+  </div>
+  <div class="spacer1"></div>
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text center">
+          <p style="color: white; text-align: center">
+            HUN TRAVEL COMPANY 2024 ©
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>

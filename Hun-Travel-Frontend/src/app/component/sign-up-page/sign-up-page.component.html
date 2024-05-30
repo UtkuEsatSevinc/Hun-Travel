@@ -1,0 +1,155 @@
+<body>
+  <div class="background">
+    <div class="row" style="background-color: rgba(255, 255, 255, 0.4)">
+      <div class="spacer3"></div>
+    </div>
+
+    <div class="row">
+      <div
+        class="col-md-4"
+        style="background-color: rgba(255, 255, 255, 0.4)"
+      ></div>
+
+      <div class="col-md-4" style="background-color: rgba(255, 255, 255, 0.4)">
+        <div class="signup-container">
+          <p></p>
+          <div class="row">
+            <div class="col-md-1">
+              <button style="background-color: white; border-color: white">
+                <img
+                  routerLink="/home"
+                  style="width: 20px"
+                  src="https://www.pinclipart.com/picdir/big/214-2147603_free-returns-return-icon-vector-clipart.png"
+                />
+              </button>
+            </div>
+
+            <div class="col-md-10">
+              <h2 style="text-align: center">Sign Up</h2>
+            </div>
+            <div class="col-md-1"></div>
+          </div>
+
+          <!-- Form elemanları -->
+          <div class="form-group">
+            <label for="name" class="form-label">Name</label>
+            <input
+              type="name"
+              class="form-control"
+              id="name"
+              placeholder="Name"
+              [(ngModel)]="registerInfo.name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="surname" class="form-label">Surname</label>
+            <input
+              type="surname"
+              class="form-control"
+              id="surname"
+              placeholder="Surname"
+              [(ngModel)]="registerInfo.surname"
+            />
+          </div>
+          <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input
+              style="width: 100%"
+              type="email"
+              class="form-control"
+              id="email"
+              placeholder="Email"
+              [(ngModel)]="registerInfo.email"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password" class="form-label">Password</label>
+            <input
+              style="width: 100%"
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="Password"
+              [(ngModel)]="registerInfo.password"
+            />
+          </div>
+          <div class="form-group">
+            <label for="phoneNumber" class="form-label">Phone Number</label>
+            <input
+              type="phoneNumber"
+              class="form-control"
+              id="phoneNumber"
+              placeholder="Phone Number"
+              [(ngModel)]="registerInfo.phoneNumber"
+            />
+          </div>
+          <div class="form-group">
+            <label for="turkishCitizenshipNumber" class="form-label"
+              >Turkish Citizenship Number</label
+            >
+            <input
+              type="turkishCitizenshipNumber"
+              class="form-control"
+              id="turkishCitizenshipNumber"
+              placeholder="Turkish Citizenship Number"
+              [(ngModel)]="registerInfo.tc"
+            />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Gender</label>
+            <div class="gender-label">
+              <input
+                class="gender-input"
+                type="radio"
+                name="gender"
+                id="female"
+                value="female"
+                [(ngModel)]="registerInfo.gender"
+              />
+              <label for="female">Female</label>
+            </div>
+            <div class="gender-label">
+              <input
+                class="gender-input"
+                type="radio"
+                name="gender"
+                id="male"
+                value="male"
+                [(ngModel)]="registerInfo.gender"
+              />
+              <label for="male">Male</label>
+              <p></p>
+            </div>
+          </div>
+          <button
+            (click)="signUp()"
+            type="submit"
+            class="btn"
+            style="background-color: #171770; color: white"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+      <div
+        class="col-md-4"
+        style="background-color: rgba(255, 255, 255, 0.4)"
+      ></div>
+    </div>
+    <div class="row" style="background-color: rgba(255, 255, 255, 0.4)">
+      <div class="spacer2"></div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text center">
+          <p style="color: white; text-align: center">
+            HUN TRAVEL COMPANY 2024 ©
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>

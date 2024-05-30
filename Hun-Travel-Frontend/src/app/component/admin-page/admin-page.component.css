@@ -1,0 +1,68 @@
+.container {
+  display: flex;
+  justify-content: center; /* Yatayda ortala */
+  align-items: center; /* Dikeyde ortala */
+  height: 700px; /* İçerik yüksekliği */
+  margin-left: 10em;
+}
+.changeContainer {
+  display: flex;
+  justify-content: center; /* Yatayda ortala */
+  align-items: center; /* Dikeyde ortala */
+  height: 700px; /* İçerik yüksekliği */
+  margin-left: 8em;
+  font-weight: 600;
+}
+
+.addDriverCizgi {
+  border: 1px solid black; /* İnce siyah çizgi çerçeve */
+  border-radius: 10px; /* Köşeleri ovalleştirmek için 10 piksel yarıçap */
+  width: 800px; /* Genişlik */
+  height: 630px; /* Yükseklik */
+}
+.addTravel {
+  border: 1px solid black; /* İnce siyah çizgi çerçeve */
+  border-radius: 10px; /* Köşeleri ovalleştirmek için 10 piksel yarıçap */
+  width: 520px; /* Genişlik */
+  height: 600px; /* Yükseklik */
+}
+.dropDriver {
+  border: 1px solid black; /* İnce siyah çizgi çerçeve */
+  border-radius: 10px; /* Köşeleri ovalleştirmek için 10 piksel yarıçap */
+  width: 800px; /* Genişlik */
+  height: 425px; /* Yükseklik */
+}
+.dropTravel {
+  border: 1px solid black; /* İnce siyah çizgi çerçeve */
+  border-radius: 10px; /* Köşeleri ovalleştirmek için 10 piksel yarıçap */
+  width: 800px; /* Genişlik */
+  height: 350px; /* Yükseklik */
+}
+.travelDriver {
+  border: 1px solid black; /* İnce siyah çizgi çerçeve */
+  border-radius: 10px; /* Köşeleri ovalleştirmek için 10 piksel yarıçap */
+  width: 2500px; /* Genişlik */
+  height: 470px; /* Yükseklik */
+}
+
+.changeButton {
+  background-color: #191970;
+  border-radius: 15px;
+  color: white;
+  margin-left: 4em;
+  font-size: 130%;
+}
+.changeSize {
+  height: 40px;
+}
+footer {
+  background: #191970;
+  padding-top: 20px;
+  padding-bottom: white;
+  font-size: 24px;
+}
+
+footer a {
+  color: white;
+  font-size: 20px;
+}

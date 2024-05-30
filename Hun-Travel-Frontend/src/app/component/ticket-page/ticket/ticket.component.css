@@ -1,0 +1,144 @@
+.card {
+  /* Kartın boyutlarını belirtin */
+  width: 1053px;
+  height: 100px;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.1);
+}
+
+.card-title {
+  font-size: 1.25rem;
+}
+
+.card-text {
+  font-size: 1rem; /* Kart içeriği font boyutu */
+  margin-bottom: 10px; /* Kart içeriği ile buton arasındaki boşluk */
+}
+
+.btn-primary {
+  width: 100%; /* Buton genişliği */
+}
+
+.center {
+  text-align: center;
+}
+.custom-heading {
+  font-size: 1.3em; /* Metin boyutunu büyük tut */
+}
+
+.car-door1 {
+  width: 55px; /* Yuvarlak şeklin genişliği */
+  height: 48px; /* Yuvarlak şeklin yüksekliği */
+  background-color: #333;
+  border-radius: 50%; /* Yuvarlak şeklin çember olmasını sağlar */
+  position: relative;
+
+  transform: translate(25%, 10%);
+}
+
+.car-door {
+  width: 60px; /* Kapı genişliği */
+  height: 15px; /* Kapı yüksekliği */
+  background-color: #333;
+  position: relative;
+  border-radius: 0 10px 10px 0;
+}
+
+.door-handle {
+  width: 10px;
+  height: 50px;
+  background-color: blue;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+}
+
+.bus {
+  border: 2px solid black;
+  padding: 8px;
+  display: inline-block;
+  border-radius: 30px;
+  background-color: #cfe2f3;
+}
+
+body {
+  background-color: #f0f0f0;
+}
+
+.center {
+  text-align: center;
+}
+
+.small {
+  font-size: 19px;
+}
+
+.spacer1 {
+  margin-bottom: 1em;
+}
+
+.spacer2 {
+  margin-bottom: 2em;
+}
+.spacer3 {
+  margin-bottom: 3em;
+}
+.spacer4 {
+  margin-bottom: 4em;
+}
+.spacer5 {
+  margin-bottom: 8em;
+}
+.spacer6 {
+  margin-bottom: 12em;
+}
+.spacer {
+  margin-bottom: 25em;
+}
+footer {
+  background: #191970;
+  padding-top: 20px;
+  padding-bottom: white;
+  font-size: 24px;
+}
+
+footer a {
+  color: white;
+  font-size: 20px;
+}
+.image-container {
+  display: flex; /* Resimleri yan yana gösterir */
+}
+
+.image-container img {
+  margin-right: 10px; /* Resimler arasında boşluk bırakır */
+}
+.cizgi {
+  border: 1px grey; /* İnce turuncu çizgi */
+}
+
+
+.maleSeat {
+  background-color: blue;
+  color: white;
+}
+
+.femaleSeat {
+  background-color: pink;
+  color: white;
+}
+
+.selectedSeat {
+  background-color: green;
+  color: white;
+}
+
+.active-button {
+  background-color: green;
+  color: white;
+}

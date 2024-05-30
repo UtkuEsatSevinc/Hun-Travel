@@ -1,0 +1,554 @@
+<head>
+  <style>
+    body {
+      background-color: white;
+    }
+    .navbar {
+      background-color: #191970;
+    }
+    .navbar-brand {
+      margin-left: 30px;
+    }
+    .spacer {
+      margin-bottom: 4em;
+    }
+    .spacer1 {
+      margin-bottom: 3em;
+    }
+    .spacer2 {
+      margin-bottom: 45px;
+    }
+    .spacer3 {
+      margin-bottom: 2em;
+    }
+
+    .button {
+      margin: 10px;
+      border-radius: 15px;
+      width: 200px;
+      font-size: 16px;
+      height: 44px;
+      background-color: white;
+    }
+    .addDriver {
+      width: 400px;
+      margin-left: 5em;
+    }
+    .siyah-cizgi {
+      border: 1px solid black; /* İnce turuncu çizgi */
+      width: 30em;
+    }
+  </style>
+</head>
+<body>
+  <div class="row">
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <div
+          style="
+            background-color: white;
+            border-radius: 20px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 3em;
+          "
+        >
+          <img
+            src="https://www.pngitem.com/pimgs/m/94-947302_png-bus-ticket-traveling-bus-logo-transparent-png.png"
+            alt=""
+            class="img"
+            style="width: 3em; height: 2em; margin-left: 2em; font-size: 70%"
+            routerLink="/anasayfa"
+          />
+          <a
+          routerLink="/admin"
+            class="navbar-brand"
+            style="color: #191970; text-decoration: none; margin-right: 1em"
+            >HUN TRAVEL COMPANY</a
+          >
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a routerLink="/home" class="nav-link active" style="color: white"
+                >Log Out</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="spacer3"></div>
+  <!--navbar bitişi-->
+  <div class="row">
+    <div
+      class="col-md-2"
+      style="background-color: #191970; color: white; border-radius: 20px"
+    >
+      <div class="spacer"></div>
+      <p>
+        <button (click)="addDriver()" class="button" style="margin-left: 3em">
+          Add Driver
+        </button>
+      </p>
+
+      <div class="spacer1"></div>
+      <button (click)="addTravel()" class="button" style="margin-left: 3em">
+        Add Travel
+      </button>
+      <div class="spacer1"></div>
+      <button (click)="dropDriver()" class="button" style="margin-left: 3em">
+        Drop Driver
+      </button>
+      <div class="spacer1"></div>
+      <button (click)="dropTravel()" class="button" style="margin-left: 3em">
+        Drop Travel
+      </button>
+      <div class="spacer1"></div>
+      <button (click)="driverTravel()" class="button" style="margin-left: 3em">
+        Sefer-Şoför Atama
+      </button>
+      <div class="spacer2"></div>
+    </div>
+
+    <div class="col-md-8">
+      <div *ngIf="currentPage === 'admin'">
+        <h1>Admin Profile</h1>
+      </div>
+
+      <!--sürücü ekle-->
+      <div *ngIf="currentPage === 'addDriver'">
+        <div
+          style="width: 600px; padding: 20px; margin-left: 20em"
+          class="addDriverCizgi"
+        >
+          <div class="form-group">
+            <label for="name" class="form-label" style="margin-left: 5em"
+              >Name</label
+            >
+            <input
+              type="text"
+              class="form-control addDriver"
+              id="name"
+              placeholder="Name"
+              [(ngModel)]="driverInfo.name"
+            />
+            <label for="name" class="form-label" style="margin-left: 5em"
+              >Surname</label
+            >
+            <input
+              type="text"
+              class="form-control addDriver"
+              id="surname"
+              placeholder="Surname"
+              [(ngModel)]="driverInfo.surname"
+            />
+          </div>
+          <div class="form-group">
+            <label for="TCNO" class="form-label" style="margin-left: 5em"
+              >TCNO</label
+            >
+            <input
+              class="form-control addDriver"
+              id="TCNO"
+              placeholder="TCNO"
+              [(ngModel)]="driverInfo.tc"
+            />
+          </div>
+          <div class="form-group">
+            <label for="email" class="form-label" style="margin-left: 5em"
+              >E-mail</label
+            >
+            <input
+              type="email"
+              class="form-control addDriver"
+              id="email"
+              placeholder="E-mail"
+              [(ngModel)]="driverInfo.email"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password" class="form-label" style="margin-left: 5em"
+              >Password</label
+            >
+            <input
+              type="password"
+              class="form-control addDriver"
+              id="password"
+              placeholder="Password"
+              [(ngModel)]="driverInfo.password"
+            />
+          </div>
+          <div class="form-group">
+            <label for="phone" class="form-label" style="margin-left: 5em"
+              >Phone Number</label
+            >
+            <input
+              type="text"
+              class="form-control addDriver"
+              id="phone"
+              placeholder="Phone Number"
+              [(ngModel)]="driverInfo.phoneNumber"
+            />
+          </div>
+          <div class="form-group">
+            <label
+              for="DriverLicence "
+              class="form-label"
+              style="margin-left: 5em"
+              >Driver Licence</label
+            >
+            <input
+              class="form-control addDriver"
+              id="DriverLicence"
+              placeholder="Driver Licence"
+              [(ngModel)]="driverInfo.licence"
+            />
+            <div class="row">
+              <div class="col-md-2">
+                <div style="margin-left: 80px">Cinsiyet:</div>
+                <div class="gender-label" style="margin-left: 80px; display: flex;">
+                  <input
+                    class="gender-input"
+                    type="radio"
+                    name="gender"
+                    id="female"
+                    value="FEMALE"
+                    [(ngModel)]="driverInfo.gender"
+                  />
+                  <label for="female">Female</label>
+                </div>
+                <div class="gender-label" style="margin-left: 80px; display: flex;">
+                  <input
+                    class="gender-input"
+                    type="radio"
+                    name="gender"
+                    id="male"
+                    value="MALE"
+                    [(ngModel)]="driverInfo.gender"
+                  />
+                  <label for="male">Male</label>
+                </div>
+              </div>
+              <div class="col-md-10">
+                <button
+                  style="
+                    margin-top: 30px;
+                    margin-left: 170px;
+                    background-color: #191970;
+                    color: white;
+                    border-radius: 20px;
+                    width: 10em;
+                  "
+                  class="Submit"
+                  (click)="sendDriverInfo()"
+                >
+                  Submit
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--sürücü ekle-->
+      <!--sefer ekle-->
+      <div *ngIf="currentPage === 'addTravel'">
+        <div
+          style="padding: 20px; margin-top: -5px; margin-left: 20em"
+          class="addTravel"
+        >
+          <h4 style="margin-left: 150px">Create Travel</h4>
+          <p></p>
+          <form style="margin-left: 5%" id="cityForm">
+            <div>
+              <label for="departureCity">Place of Departure</label>
+              <br />
+              <select
+                id="departureCity"
+                (change)="onSelectDepartureCity($event)"
+              >
+              <option value="">Select</option>
+              <option value="Istanbul">İstanbul</option>
+              <option value="Ankara">Ankara</option>
+              <option value="Izmir">İzmir</option>
+              <option value="Antalya">Antalya</option>
+              <option value="Eskisehir">Eskişehir</option>
+              <option value="Samsun">Samsun</option>
+              <option value="Hatay">Hatay</option>
+              <option value="Bursa">Bursa</option>
+              <option value="Sivas">Sivas</option>
+              <option value="Kars">Kars</option>
+              <option value="Edirne">Edirne</option>
+              <option value="Tekirdag">Tekirdağ</option>
+              </select>
+            </div>
+            <p></p>
+            <label for="time">Departure time (as Time: HH:mm):</label><br />
+            <input
+              type="time"
+              id="time1"
+              value="09:00"
+              (change)="onDepartureTime($event)"
+            />
+            <p></p>
+            <div>
+              <label for="arrivalCity">Destination</label>
+              <br />
+              <select id="arrivalCity" (change)="onSelectArrivalCity($event)">
+              <option value="">Select</option>
+              <option value="Istanbul">İstanbul</option>
+              <option value="Ankara">Ankara</option>
+              <option value="Izmir">İzmir</option>
+              <option value="Antalya">Antalya</option>
+              <option value="Eskisehir">Eskişehir</option>
+              <option value="Samsun">Samsun</option>
+              <option value="Hatay">Hatay</option>
+              <option value="Bursa">Bursa</option>
+              <option value="Sivas">Sivas</option>
+              <option value="Kars">Kars</option>
+              <option value="Edirne">Edirne</option>
+              <option value="Tekirdag">Tekirdağ</option>
+              </select>
+              <p></p>
+              <label for="time">Destination time (as Time: HH:mm):</label><br />
+              <input
+                type="time"
+                id="time2"
+                value="09:00"
+                (change)="onArrivalTime($event)"
+              />
+              <p></p>
+
+              <label for="date">Enter Date (as Date: yyyy-mm-dd):</label><br />
+              <input
+                type="date"
+                id="start"
+                name="trip-start"
+                value="2024-05-07"
+                min="2024-05-07"
+                max="2025-12-31"
+                (change)="onDepartureDate($event)"
+              />
+              <p></p>
+              <div class="form-group">
+                <label for="plate" class="form-label">Licence Plate</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="plate"
+                  name="plate"
+                  [(ngModel)]="travelInfo.licencePlate"
+                />
+                <label for="price" class="form-label">Price</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="price"
+                  name="price"
+                  [(ngModel)]="travelInfo.price"
+                />
+              </div>
+
+              <p></p>
+              <button
+                style="
+                  background-color: #191970;
+                  color: white;
+                  margin-left: 60px;
+                  margin-top: 10px;
+                "
+                (click)="sendTravelInfo()"
+              >
+                Save
+              </button>
+              <br />
+              <p id="message"></p>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!--sefer ekle-->
+      <!--sürücü çıkar-->
+      <div *ngIf="currentPage === 'dropDriver'">
+        <div
+          style="
+            width: 680px;
+            padding: 20px;
+            margin-top: 6em;
+            margin-left: 18em;
+            overflow: auto;
+          "
+          class="dropDriver"
+        >
+          <ul style="list-style-type: none; padding: 0">
+            <li
+              *ngFor="let driver of driverList; let i = index"
+              style="margin-bottom: 10px"
+            >
+              <div style="display: flex; align-items: center">
+                <div style="flex-grow: 1">
+                  <strong>{{ i + 1 }}. Sürücü:</strong> <br />
+                  <span>Adı: {{ driver.name + " " + driver.surname }}</span> |
+                  <br />
+                  <span>TC No: {{ driver.tc }}</span> | <br />
+                  <span>Lisans Numarası: {{ driver.licence }}</span>
+                </div>
+                <button
+                  style="
+                    background-color: red;
+                    color: white;
+                    margin-right: 15em;
+                  "
+                  (click)="deleteDriver(driver.id)"
+                >
+                  Delete
+                </button>
+              </div>
+              <p></p>
+              <div class="siyah-cizgi"></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!--sürücü çıkar-->
+
+      <!--sefer çıkar-->
+      <div *ngIf="currentPage === 'dropTravel'">
+        <div
+          style="
+            width: 680px;
+            padding: 20px;
+            margin-top: 6em;
+            margin-left: 18em;
+            overflow: auto;
+          "
+          class="dropDriver"
+        >
+          <ul style="list-style-type: none; padding: 0">
+            <li
+              *ngFor="let travel of travelList; let i = index"
+              style="margin-bottom: 10px"
+            >
+              <div style="display: flex; align-items: center">
+                <div style="flex-grow: 1">
+                  <strong>{{ i + 1 }}. Travel:</strong> <br />
+                  <p></p>
+                  <span>{{ travel.departure }} - {{ travel.destination }}</span>
+                  | <br />
+                  <span> Tarih: {{ travel.departureDate }}</span> |
+                  {{ travel.departureTime }} <br />
+                </div>
+                <button
+                  style="
+                    background-color: red;
+                    color: white;
+                    margin-right: 15em;
+                  "
+                  (click)="deleteTravel(travel.id)"
+                >
+                  Delete
+                </button>
+              </div>
+              <p></p>
+              <div class="siyah-cizgi"></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!--sürücü-->
+      <!--sefer çıkar-->
+      <!--şöför sefer-->
+      <div *ngIf="currentPage === 'driverTravel'">
+        <div>
+          <div
+            style="
+              width: 800px;
+              padding: 20px;
+              margin-top: 5em;
+              margin-left: 13em;
+              overflow: auto;
+            "
+            class="travelDriver"
+          >
+            <h2 style="margin-left: 6em">Travel - Driver Assignment</h2>
+            <br />
+
+            <!-- Şoför Seçimi İçin Dropdown -->
+            <div>
+              <label for="driverSelect">Select Driver</label>
+              <select
+                id="driverSelect"
+                [(ngModel)]="selectedDriver"
+                class="form-control"
+                
+              >
+                <option *ngFor="let driver of driverList" [value]="driver.id">
+                  {{ driver.name + " " + driver.surname }} ({{ driver.tc }})
+                </option>
+              </select>
+            </div>
+
+            <hr />
+
+            <!-- Sefer Listesi -->
+            <h3>Sefere Şoför Atama</h3>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>From</th>
+                  <th>To</th>
+                  <th>Date</th>
+                  <th>Assigned Driver</th>
+                  <th>Assign</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let travel of travelList">
+                  <td>{{ travel.id }}</td>
+                  <td>{{ travel.departure }}</td>
+                  <td>{{ travel.destination }}</td>
+                  <td>{{ travel.departureDate }}</td>
+                  <td>
+                    {{ travel.driver ? (travel.driver.name + " " + travel.driver.surname) : "Not assigned" }}
+                  </td>
+                  <td>
+                    <button
+                      class="btn btn-primary"
+                      (click)="assignDriver(selectedDriver, travel.id)"
+                    >
+                      Assign Selected Driver
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!---->
+      </div>
+
+      <!---->
+
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+
+  <!--son-->
+  <div class="spacer2"></div>
+  <footer>
+    <div class="">
+      <div class="row">
+        <div class="col-12 text center">
+          <p style="color: white; text-align: center">
+            HUN TRAVEL COMPANY 2024 ©
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>

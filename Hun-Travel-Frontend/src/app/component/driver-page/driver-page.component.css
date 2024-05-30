@@ -1,0 +1,64 @@
+.container {
+  display: flex;
+  justify-content: center; /* Yatayda ortala */
+  align-items: center; /* Dikeyde ortala */
+  height: 700px; 
+  margin-left: 10em;
+}
+
+.cizgi {
+  border: 1px solid black; /* İnce siyah çizgi çerçeve */
+  border-radius: 10px; /* Köşeleri ovalleştirmek için 10 piksel yarıçap */
+  width: 800px; /* Genişlik */
+  height: auto; /* Yükseklik */
+  background-color: white;
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-height: 550px;
+  margin-left: 13em;
+  text-align: center;
+}
+
+footer {
+  background: #191970;
+  padding-top: 20px;
+  padding-bottom: white;
+  font-size: 24px;
+}
+
+footer a {
+  color: white;
+  font-size: 20px;
+}
+.card {
+  width: 1060px;
+  height: 100px;
+  margin-bottom: 15px; /* Kartlar arasındaki boşluk */
+}
+
+.card-title {
+  font-size: 1.25rem; /* Kart başlığı font boyutu */
+}
+
+.card-text {
+  font-size: 1rem;
+  margin-bottom: 10px; 
+}
+
+.userContainer {
+  /* display: flex;
+  justify-content: flex-start;
+  width: 780px;
+  margin-left: 20px;
+  height: 120px;
+  flex-wrap: wrap;  
+  margin-bottom: 10px; */
+}
+
+.inline-box {
+  margin-right: 1px;
+}
+
+/* .userContainer {
+  background-color: red;
+} */

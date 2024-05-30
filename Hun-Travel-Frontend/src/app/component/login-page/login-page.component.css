@@ -1,0 +1,11 @@
+footer {
+  background: #191970;
+  padding-top: 20px;
+  padding-bottom: white;
+  font-size: 24px;
+}
+
+footer a {
+  color: white;
+  font-size: 20px;
+}

@@ -1,0 +1,127 @@
+<head>
+  <style>
+    .background {
+      background-image: url("https://i.pinimg.com/originals/d6/6f/c8/d66fc8229ccb24fbb72c978672fa6715.jpg");
+    }
+
+    .login-container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 30px;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 10px;
+    }
+
+    .spacer {
+      margin-bottom: 2em;
+    }
+    .spacer1 {
+      margin-bottom: 11em;
+    }
+    .spacer2 {
+      margin-bottom: 14em;
+    }
+  </style>
+</head>
+<body>
+  <div class="background">
+    <div class="row" style="background-color: rgba(255, 255, 255, 0.4)">
+      <div class="spacer1"></div>
+    </div>
+    <div class="row">
+      <div
+        class="col-md-4"
+        style="background-color: rgba(255, 255, 255, 0.4)"
+      ></div>
+      <div class="col-md-4" style="background-color: rgba(255, 255, 255, 0.4)">
+        <div class="login-container">
+          <div class="row">
+            <div class="col-md-1">
+              <button style="background-color: white; border-color: white">
+                <img
+                  routerLink="/home"
+                  style="width: 20px"
+                  src="https://www.pinclipart.com/picdir/big/214-2147603_free-returns-return-icon-vector-clipart.png"
+                />
+              </button>
+            </div>
+            <div class="col-md-10">
+              <h2 style="text-align: center">Login</h2>
+              <p></p>
+            </div>
+            <div class="col-md-1"></div>
+          </div>
+          <div class="spacer"></div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail1" class="form-label"
+              >Email address</label
+            >
+            <input
+              type="email"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="E-mail"
+              [(ngModel)]="loginInfo.email"
+            />
+            <div id="emailHelp" class="form-text">
+              We'll never share your email with anyone else.
+            </div>
+          </div>
+          <div class="spacer"></div>
+          <div class="form-group">
+            <label for="exampleInputPassword1" class="form-label"
+              >Password</label
+            >
+            <input
+              type="password"
+              class="form-control"
+              id="exampleInputPassword1"
+              placeholder="Password"
+              [(ngModel)]="loginInfo.password"
+            />
+          </div>
+          <div class="spacer"></div>
+          <button
+            type="button"
+            class="btn"
+            style="background-color: #191970; color: white; margin-left: 12em"
+            (click)="login()"
+          >
+            Submit
+          </button>
+        </div>
+      </div>
+      <div
+        class="col-md-4"
+        style="background-color: rgba(255, 255, 255, 0.4)"
+      ></div>
+    </div>
+    <div
+      class="row"
+      style="height: 170px; background-color: rgba(255, 255, 255, 0.4)"
+    ></div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-12 text center">
+          <p style="color: white; text-align: center">
+            HUN TRAVEL COMPANY 2024 ©
+          </p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
