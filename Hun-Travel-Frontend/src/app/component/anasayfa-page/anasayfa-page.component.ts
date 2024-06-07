@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BiletService } from '../../bilet-service/bilet.service';
+import { FormControl, FormGroup } from '@angular/forms';
 declare let alertify: any;
 
 @Component({
@@ -19,10 +20,27 @@ export class AnasayfaPageComponent implements OnInit  {
     departure: '',
     destination: '',
   }
-
+  form = new FormGroup({
+    kalkisYeri: new FormControl(''), // Initial value set to an empty string
+    varisYeri: new FormControl('')
+  });
   isSelected: boolean = false;
   isSelected2: boolean = false;
-
+  selectedValue: any;
+  cities: any[] = [
+    'İstanbul',
+    'Ankara',
+    'İzmir',
+    'Antalya',
+    'Eskişehir',
+    'Samsun',
+    'Hatay',
+    'Bursa',
+    'Sivas',
+    'Kars',
+    'Edirne',
+    'Tekirdağ'
+  ]
   constructor(private biletService: BiletService) {}
 
   ngOnInit(): void {
@@ -59,6 +77,7 @@ export class AnasayfaPageComponent implements OnInit  {
   onSelectDeparture(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     this.filterInfo.departure = selectElement.value;
+    this.selectedValue = selectElement.value;
   }
 
   onSelectDestination(event: Event): void {

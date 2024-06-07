@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BiletService } from '../../bilet-service/bilet.service';
 import e from 'express';
+import { FormControl, Validators } from '@angular/forms';
 declare let alertify: any;
 
 interface Driver {
@@ -24,8 +25,13 @@ interface Travel {
 })
 
 export class AdminPageComponent implements OnInit {
+  today: string = "";
+  errorMessage = "";
   currentPage: string = 'addDriver';
-
+  tcValidator = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(11), Validators.maxLength(11)]);
+  phoneValidator = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(11), Validators.maxLength(11)]);
+  emailValidator = new FormControl('', [Validators.required, Validators.email]);
+  contactMessages: any[] = [];
   driverInfo: any = {
     name: '',
     surname: '',
@@ -54,8 +60,26 @@ export class AdminPageComponent implements OnInit {
 
   selectedDriver: string = '';
 
-  constructor(private biletService: BiletService) {}
+  constructor(private biletService: BiletService) {
+    this.today = new Date().toISOString().split('T')[0];
+  }
+  tcInputInvalid() {
+    return this.tcValidator.hasError('pattern') || this.tcValidator.hasError('minlength') || this.tcValidator.hasError('maxlength');
+  }
+  phoneInputInvalid() {
+    return this.phoneValidator.hasError('pattern') || this.phoneValidator.hasError('minlength') || this.phoneValidator.hasError('maxlength');
+  }
 
+  emailInputInvalid() {
+    return this.emailValidator.hasError('email');
+  }
+
+  validateInput(value:any) {
+    if(value < 0) {
+      alert("Please enter a value greater than 0");
+      this.travelInfo.price = 0;
+    }
+  }
   sendDriverInfo(): void {
     if (
       this.driverInfo.name.trim() === '' ||
@@ -111,32 +135,38 @@ export class AdminPageComponent implements OnInit {
       alertify.error('Please fill in all fields.');
     }
     else {
-      this.travelInfo.price = parseInt(this.travelInfo.price)
-      // this.travelInfo.departureTime += ":00";
-      // this.travelInfo.destinationTime += ":00";
-      this.biletService.addTravel(this.travelInfo).subscribe(
-        (response) => {
-          if(response) {
-            alertify.success('Travel is added successfully!');
-            // this.travelInfo = {
-            //   departure: 'İstanbul',
-            //   destination: 'İstanbul',
-            //   departureDate: '',
-            //   departureTime: '09:00:00',
-            //   destinationDate: '',
-            //   destinationTime: '09:00:00',
-            //   licencePlate: '',
-            //   price: 0,
-            // };
-          }
-          else {
+      if(!this.tcInputInvalid() || ! this.phoneInputInvalid() || !this.emailInputInvalid()) {
+        this.travelInfo.price = parseInt(this.travelInfo.price)
+        // this.travelInfo.departureTime += ":00";
+        // this.travelInfo.destinationTime += ":00";
+        this.biletService.addTravel(this.travelInfo).subscribe(
+          (response) => {
+            if(response) {
+              alertify.success('Travel is added successfully!');
+              // this.travelInfo = {
+              //   departure: 'İstanbul',
+              //   destination: 'İstanbul',
+              //   departureDate: '',
+              //   departureTime: '09:00:00',
+              //   destinationDate: '',
+              //   destinationTime: '09:00:00',
+              //   licencePlate: '',
+              //   price: 0,
+              // };
+            }
+            else {
+              alertify.error('Travel is not added successfully!');
+            }
+          },
+          (error) => {
             alertify.error('Travel is not added successfully!');
           }
-        },
-        (error) => {
-          alertify.error('Travel is not added successfully!');
-        }
-      );
+        );
+      } else {
+        this.errorMessage = "Please enter a valid input."
+      }
+
+      
     }
     
   }
@@ -173,6 +203,17 @@ export class AdminPageComponent implements OnInit {
         console.error('Error fetching data', error);
       }
     );
+  }
+
+  contactMessageList() {
+    this.biletService.getContactMessageList().subscribe(
+      (response) => {
+        this.contactMessages = response;
+      },
+      (error) => {
+        console.log('Error fetching data', error)
+      }
+    )
   }
 
   deleteDriver(driverId: string): void {
@@ -252,6 +293,11 @@ export class AdminPageComponent implements OnInit {
     this.getDriverList();
     this.getTravelList();
     this.currentPage = 'driverTravel';
+  }
+
+  contactMessage() {
+    this.contactMessageList();
+    this.currentPage = 'contactMessages'
   }
 
   ngOnInit(): void {

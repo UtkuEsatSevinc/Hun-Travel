@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Bilet } from './bilet';
 import { BiletService } from '../../../bilet-service/bilet.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 declare let alertify: any;
 
@@ -15,7 +15,24 @@ export class TicketComponent implements OnInit {
   selectedKalkisYeri?: string;
   seferFilterForm!: FormGroup;
   seferFilters?: { kalkisYeri: string; varisYeri: string; seferSaat: string };
-
+  form = new FormGroup({
+    kalkisYeri: new FormControl(''), // Initial value set to an empty string
+    varisYeri: new FormControl('')
+  });
+  cities: any[] = [
+    'İstanbul',
+    'Ankara',
+    'İzmir',
+    'Antalya',
+    'Eskişehir',
+    'Samsun',
+    'Hatay',
+    'Bursa',
+    'Sivas',
+    'Kars',
+    'Edirne',
+    'Tekirdağ'
+  ]
   filterArray: any = {
     departure: '',
     destination: '',
@@ -40,7 +57,7 @@ export class TicketComponent implements OnInit {
   userGender: any;
 
   sentFilter: any;
-
+  selectedValue:any;
   buttons: boolean[] = Array(31).fill(false);
 
   dateButtons: any[] = [
@@ -167,6 +184,7 @@ export class TicketComponent implements OnInit {
   onSelectDeparture(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     this.filterArray.departure = selectElement.value;
+    this.selectedValue = selectElement.value;
   }
 
   onSelectDestination(event: Event): void {

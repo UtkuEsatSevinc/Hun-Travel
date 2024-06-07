@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BiletService } from '../../bilet-service/bilet.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 declare let alertify: any;
 
 @Component({
@@ -8,7 +9,13 @@ declare let alertify: any;
   templateUrl: './sign-up-page.component.html',
   styleUrl: './sign-up-page.component.css',
 })
-export class SignUpPageComponent {
+export class SignUpPageComponent{
+tcValidator = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(11), Validators.maxLength(11)]);
+phoneValidator = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(11), Validators.maxLength(11)]);
+  emailValidator = new FormControl('', [Validators.required, Validators.email]);
+  registerForm!: FormGroup ;
+
+  errorMessage = "";
   registerInfo: any = {
     name: '',
     surname: '',
@@ -20,9 +27,13 @@ export class SignUpPageComponent {
     role: 'USER',
   };
   response: any;
+  
+  constructor(private router: Router, private biletService: BiletService,private formBuilder: FormBuilder) {
+     
 
-  constructor(private router: Router, private biletService: BiletService) {}
-
+  }
+  
+ 
   sendPostRequest(): void {
     if (
       this.registerInfo.name.trim() === '' ||
@@ -54,7 +65,23 @@ export class SignUpPageComponent {
   }
 
   signUp() {
-    this.registerInfo.gender = this.registerInfo.gender.toUpperCase();
-    this.sendPostRequest();
+    
+      if(!this.tcInputInvalid() || ! this.phoneInputInvalid() || !this.emailInputInvalid()) {
+        this.registerInfo.gender = this.registerInfo.gender.toUpperCase();
+        this.sendPostRequest();
+      } else {
+        this.errorMessage = "Please enter a valid input."
+      }
+  }
+
+  tcInputInvalid() {
+    return this.tcValidator.hasError('pattern') || this.tcValidator.hasError('minlength') || this.tcValidator.hasError('maxlength');
+  }
+  phoneInputInvalid() {
+    return this.phoneValidator.hasError('pattern') || this.phoneValidator.hasError('minlength') || this.phoneValidator.hasError('maxlength');
+  }
+
+  emailInputInvalid() {
+    return this.emailValidator.hasError('email');
   }
 }

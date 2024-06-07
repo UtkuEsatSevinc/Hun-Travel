@@ -108,7 +108,22 @@
             <div class="row">
               <div class="col-md-4">
                 <label for="kalkisYeri" style="margin-left: -20em">From</label>
-                <select
+                <form [formGroup]="form">
+                  <select
+                    class="form-select"
+                    id="kalkisYeri"
+                    aria-label="Departure"
+                    formControlName="kalkisYeri"
+                    style="width: 29em"
+                    (change)="onSelectDeparture($event)"
+                  >
+                    <option value="" disabled selected>Select a city</option>
+                    <ng-container *ngFor="let city of cities">
+                      <option [value]="city">{{city}}</option>
+                    </ng-container>
+                  </select>
+                </form>
+                <!-- <select
                   class="form-select"
                   id="kalkisYeri"
                   aria-label="Departure"
@@ -189,22 +204,31 @@
                   >
                     Tekirdağ
                   </option>
-                </select>
+                </select> -->
               </div>
 
               <div class="col-md-4">
                 <label class="label" for="varisYeri" style="margin-left: -18em"
                   >To</label
                 >
-                <select
-                  class="form-select"
-                  id="varisYeri"
-                  aria-label="Arrival"
-                  formControlName="varisYeri"
-                  style="width: 29em; margin-left: 3em"
-                  (change)="onSelectDestination($event)"
-                >
-                  <option value="" [selected]="isCleared">Select a city</option>
+                
+                <form [formGroup]="form">
+                
+                  <select
+                    class="form-select"
+                    id="varisYeri"
+                    aria-label="Arrival"
+                    formControlName="varisYeri"
+                    style="width: 29em; margin-left: 3em"
+                    (change)="onSelectDestination($event)"
+                  >
+                    <option value="" disabled selected>Select a city</option>
+                    <ng-container *ngFor="let city of cities">
+                      <option *ngIf="city !== selectedValue" [value]="city">{{city}}</option>
+                    </ng-container>
+                  </select>
+                </form>
+                  <!-- <option value="" [selected]="isCleared">Select a city</option>
                   <option
                     value="Istanbul"
                     [selected]="filterArray.destination === 'Istanbul'"
@@ -276,8 +300,8 @@
                     [selected]="filterArray.destination === 'Tekirdag'"
                   >
                     Tekirdağ
-                  </option>
-                </select>
+                  </option> -->
+               
               </div>
               <div
                 class="col-md-4"

@@ -66,3 +66,7 @@ footer a {
   color: white;
   font-size: 20px;
 }
+
+.buttonStyle {
+  width: -webkit-fill-available;
+}

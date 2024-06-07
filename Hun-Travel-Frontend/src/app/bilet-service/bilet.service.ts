@@ -37,6 +37,8 @@ export class BiletService {
   private getPurchasedTicketUrl = 'http://localhost:8080/user/get/purchasedTickets';
   private driverTravelUrl = 'http://localhost:8080/driver/get/travels';
   private contactUsUrl = 'http://localhost:8080/contact/add';
+  private contactUsListUrl = 'http://localhost:8080/contact/list';
+
 
   private dataSubject = new BehaviorSubject<any>(null);
   travelInformation = this.dataSubject.asObservable();
@@ -169,6 +171,10 @@ export class BiletService {
   contactUs(data: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<any>(this.contactUsUrl, data, { headers });
+  }
+
+  getContactMessageList(): Observable<any> {
+    return this.http.get<any>(this.contactUsListUrl);
   }
 
   private seferler: Sefer[][] = [

@@ -100,28 +100,20 @@
               for="kalkisYeri"
               >From</label
             >
-            <select
-              class="form-select"
-              id="kalkisYeri"
-              aria-label="Departure"
-              formControlName="kalkisYeri"
-              style="width: 17em; margin-left: 3em"
-              (change)="onSelectDeparture($event)"
-            >
-              <option value="" [selected]="isSelected">Select a city</option>
-              <option value="Istanbul">İstanbul</option>
-              <option value="Ankara">Ankara</option>
-              <option value="Izmir">İzmir</option>
-              <option value="Antalya">Antalya</option>
-              <option value="Eskisehir">Eskişehir</option>
-              <option value="Samsun">Samsun</option>
-              <option value="Hatay">Hatay</option>
-              <option value="Bursa">Bursa</option>
-              <option value="Sivas">Sivas</option>
-              <option value="Kars">Kars</option>
-              <option value="Edirne">Edirne</option>
-              <option value="Tekirdag">Tekirdağ</option>
-            </select>
+            
+            <form [formGroup]="form">
+              <select
+                class="form-select"
+                id="kalkisYeri"
+                aria-label="Departure"
+                formControlName="kalkisYeri"
+                style="width: 17em; margin-left: 3em"
+                (change)="onSelectDeparture($event)"
+              >
+                <option value="" disabled selected>Select a city</option>
+                <option *ngFor="let city of cities" [value]="city">{{city}}</option>
+              </select>
+            </form>
           </div>
           <div class="col-md-4">
             <label
@@ -130,28 +122,25 @@
               for="varisYeri"
               >To</label
             >
-            <select
-              class="form-select"
-              id="varisYeri"
-              aria-label="Arrival"
-              formControlName="varisYeri"
-              style="width: 17em; margin-left: 3em"
-              (change)="onSelectDestination($event)"
-            >
-              <option value="" [selected]="isSelected2">Select a city</option>
-              <option value="Istanbul">İstanbul</option>
-              <option value="Ankara">Ankara</option>
-              <option value="Izmir">İzmir</option>
-              <option value="Antalya">Antalya</option>
-              <option value="Eskisehir">Eskişehir</option>
-              <option value="Samsun">Samsun</option>
-              <option value="Hatay">Hatay</option>
-              <option value="Bursa">Bursa</option>
-              <option value="Sivas">Sivas</option>
-              <option value="Kars">Kars</option>
-              <option value="Edirne">Edirne</option>
-              <option value="Tekirdag">Tekirdağ</option>
-            </select>
+            
+            <form [formGroup]="form">
+              <!-- First Select Box -->
+             
+            
+              <select
+                class="form-select"
+                id="varisYeri"
+                aria-label="Arrival"
+                formControlName="varisYeri"
+                style="width: 17em; margin-left: 3em"
+                (change)="onSelectDestination($event)"
+              >
+                <option value="" disabled selected>Select a city</option>
+                <ng-container *ngFor="let city of cities">
+                  <option *ngIf="city !== selectedValue" [value]="city">{{city}}</option>
+                </ng-container>
+              </select>
+            </form>
           </div>
           <div class="col-md-4">
             <button
